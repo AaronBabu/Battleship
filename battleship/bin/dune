@@ -1,0 +1,4 @@
+(executable
+ (public_name battleship)
+ (name main)
+ (libraries battleship))
