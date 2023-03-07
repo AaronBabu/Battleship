@@ -1,0 +1,8 @@
+lib: [
+  "_build/install/default/lib/battleship/META"
+  "_build/install/default/lib/battleship/dune-package"
+  "_build/install/default/lib/battleship/opam"
+]
+bin: [
+  "_build/install/default/bin/battleship"
+]
