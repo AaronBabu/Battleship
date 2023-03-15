@@ -35,7 +35,8 @@ let rec print_grid array (row_idx: int)=
   let columns=num_columns array in 
   match array with 
   |[] -> print_string ""
-  | h::t -> print_int row_idx; if single then print_string " " else print_string ""; print_row h; print_endline ""; print_rowlines columns; print_endline ""; print_grid t (row_idx +1)
+  | h::t -> print_int row_idx; if single then print_string " " else print_string ""; 
+  print_row h; print_endline ""; print_rowlines columns; print_endline ""; print_grid t (row_idx +1)
 
 let grid= [[|" ";" "; "x"; "x"; " "; "o"; " "; "x"; "o"; " "|]; 
 [|" ";" "; "x"; "x"; " "; "o"; " "; "x"; "o"; " "|]; 
