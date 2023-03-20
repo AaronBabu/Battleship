@@ -1,9 +1,9 @@
 # dune build
 # OCAMLPARAM: unset
 # Shared cache: disabled
-# Workspace root: /mnt/c/cs3110/FinalProject3110
+# Workspace root: /Users/caitlyncahill/3110/finalproject/3110FinalProject
 # Auto-detected concurrency: 16
-$ /home/aaronbabu/.opam/cs3110-2023sp/bin/ocamlc.opt -config > /tmp/dune_b0b895_output
+$ /Users/caitlyncahill/.opam/cs3110-2023sp/bin/ocamlc.opt -config > /var/folders/th/83h9hw2d0n7d_1t3xjjnzfbm0000gn/T/dune_6c5a8c_output
 # Dune context:
 #  { name = "default"
 #  ; kind = "default"
@@ -11,80 +11,87 @@ $ /home/aaronbabu/.opam/cs3110-2023sp/bin/ocamlc.opt -config > /tmp/dune_b0b895_
 #  ; merlin = true
 #  ; for_host = None
 #  ; fdo_target_exe = None
-#  ; build_dir = In_build_dir "default"
+#  ; build_dir = "default"
 #  ; toplevel_path =
-#      Some External "/home/aaronbabu/.opam/cs3110-2023sp/lib/toplevel"
-#  ; ocaml_bin = External "/home/aaronbabu/.opam/cs3110-2023sp/bin"
-#  ; ocaml = Ok External "/home/aaronbabu/.opam/cs3110-2023sp/bin/ocaml"
-#  ; ocamlc = External "/home/aaronbabu/.opam/cs3110-2023sp/bin/ocamlc.opt"
+#      Some External "/Users/caitlyncahill/.opam/cs3110-2023sp/lib/toplevel"
+#  ; ocaml_bin = External "/Users/caitlyncahill/.opam/cs3110-2023sp/bin"
+#  ; ocaml = Ok External "/Users/caitlyncahill/.opam/cs3110-2023sp/bin/ocaml"
+#  ; ocamlc =
+#      External "/Users/caitlyncahill/.opam/cs3110-2023sp/bin/ocamlc.opt"
 #  ; ocamlopt =
-#      Ok External "/home/aaronbabu/.opam/cs3110-2023sp/bin/ocamlopt.opt"
+#      Ok External "/Users/caitlyncahill/.opam/cs3110-2023sp/bin/ocamlopt.opt"
 #  ; ocamldep =
-#      Ok External "/home/aaronbabu/.opam/cs3110-2023sp/bin/ocamldep.opt"
+#      Ok External "/Users/caitlyncahill/.opam/cs3110-2023sp/bin/ocamldep.opt"
 #  ; ocamlmklib =
-#      Ok External "/home/aaronbabu/.opam/cs3110-2023sp/bin/ocamlmklib.opt"
+#      Ok
+#        External "/Users/caitlyncahill/.opam/cs3110-2023sp/bin/ocamlmklib.opt"
 #  ; env =
 #      map
-#        { "DUNE_OCAML_HARDCODED" : "/home/aaronbabu/.opam/cs3110-2023sp/lib"
+#        { "DUNE_OCAML_HARDCODED" :
+#            "/Users/caitlyncahill/.opam/cs3110-2023sp/lib"
 #        ; "DUNE_OCAML_STDLIB" :
-#            "/home/aaronbabu/.opam/cs3110-2023sp/lib/ocaml"
-#        ; "DUNE_SOURCEROOT" : "/mnt/c/cs3110/FinalProject3110"
-#        ; "INSIDE_DUNE" : "/mnt/c/cs3110/FinalProject3110/_build/default"
+#            "/Users/caitlyncahill/.opam/cs3110-2023sp/lib/ocaml"
+#        ; "DUNE_SOURCEROOT" :
+#            "/Users/caitlyncahill/3110/finalproject/3110FinalProject"
+#        ; "INSIDE_DUNE" :
+#            "/Users/caitlyncahill/3110/finalproject/3110FinalProject/_build/default"
+#        ; "MANPATH" :
+#            "/Users/caitlyncahill/3110/finalproject/3110FinalProject/_build/install/default/bin"
 #        ; "OCAMLFIND_IGNORE_DUPS_IN" :
-#            "/mnt/c/cs3110/FinalProject3110/_build/install/default/lib"
+#            "/Users/caitlyncahill/3110/finalproject/3110FinalProject/_build/install/default/lib"
 #        ; "OCAMLPATH" :
-#            "/mnt/c/cs3110/FinalProject3110/_build/install/default/lib"
+#            "/Users/caitlyncahill/3110/finalproject/3110FinalProject/_build/install/default/lib"
 #        ; "OCAMLTOP_INCLUDE_PATH" :
-#            "/mnt/c/cs3110/FinalProject3110/_build/install/default/lib/toplevel"
+#            "/Users/caitlyncahill/3110/finalproject/3110FinalProject/_build/install/default/lib/toplevel"
 #        ; "OCAML_COLOR" : "always"
 #        ; "OPAMCOLOR" : "always"
 #        }
-#  ; findlib_paths = [ External "/home/aaronbabu/.opam/cs3110-2023sp/lib" ]
+#  ; findlib_paths =
+#      [ External "/Users/caitlyncahill/.opam/cs3110-2023sp/lib" ]
 #  ; arch_sixtyfour = true
 #  ; natdynlink_supported = true
 #  ; supports_shared_libraries = true
 #  ; ocaml_config =
 #      { version = "4.14.0"
 #      ; standard_library_default =
-#          "/home/aaronbabu/.opam/cs3110-2023sp/lib/ocaml"
-#      ; standard_library = "/home/aaronbabu/.opam/cs3110-2023sp/lib/ocaml"
+#          "/Users/caitlyncahill/.opam/cs3110-2023sp/lib/ocaml"
+#      ; standard_library =
+#          "/Users/caitlyncahill/.opam/cs3110-2023sp/lib/ocaml"
 #      ; standard_runtime = "the_standard_runtime_variable_was_deleted"
 #      ; ccomp_type = "cc"
-#      ; c_compiler = "gcc"
+#      ; c_compiler = "cc"
 #      ; ocamlc_cflags =
-#          [ "-O2"; "-fno-strict-aliasing"; "-fwrapv"; "-pthread"; "-fPIC" ]
+#          [ "-O2"; "-fno-strict-aliasing"; "-fwrapv"; "-pthread" ]
 #      ; ocamlc_cppflags = [ "-D_FILE_OFFSET_BITS=64" ]
 #      ; ocamlopt_cflags =
-#          [ "-O2"; "-fno-strict-aliasing"; "-fwrapv"; "-pthread"; "-fPIC" ]
+#          [ "-O2"; "-fno-strict-aliasing"; "-fwrapv"; "-pthread" ]
 #      ; ocamlopt_cppflags = [ "-D_FILE_OFFSET_BITS=64" ]
 #      ; bytecomp_c_compiler =
-#          [ "gcc"
+#          [ "cc"
 #          ; "-O2"
 #          ; "-fno-strict-aliasing"
 #          ; "-fwrapv"
 #          ; "-pthread"
-#          ; "-fPIC"
 #          ; "-D_FILE_OFFSET_BITS=64"
 #          ]
-#      ; bytecomp_c_libraries = [ "-lm"; "-ldl"; "-lpthread" ]
+#      ; bytecomp_c_libraries = [ "-lm"; "-lpthread" ]
 #      ; native_c_compiler =
-#          [ "gcc"
+#          [ "cc"
 #          ; "-O2"
 #          ; "-fno-strict-aliasing"
 #          ; "-fwrapv"
 #          ; "-pthread"
-#          ; "-fPIC"
 #          ; "-D_FILE_OFFSET_BITS=64"
 #          ]
-#      ; native_c_libraries = [ "-lm"; "-ldl" ]
+#      ; native_c_libraries = [ "-lm" ]
 #      ; native_pack_linker = [ "ld"; "-r"; "-o" ]
 #      ; cc_profile = []
 #      ; architecture = "amd64"
 #      ; model = "default"
 #      ; int_size = 63
 #      ; word_size = 64
-#      ; system = "linux"
-#      ; asm = [ "as" ]
+#      ; system = "macosx"
+#      ; asm = [ "cc"; "-c"; "-Wno-trigraphs" ]
 #      ; asm_cfi_supported = true
 #      ; with_frame_pointers = false
 #      ; ext_exe = ""
@@ -95,8 +102,8 @@ $ /home/aaronbabu/.opam/cs3110-2023sp/bin/ocamlc.opt -config > /tmp/dune_b0b895_
 #      ; os_type = "Unix"
 #      ; default_executable_name = "a.out"
 #      ; systhread_supported = true
-#      ; host = "x86_64-pc-linux-gnu"
-#      ; target = "x86_64-pc-linux-gnu"
+#      ; host = "x86_64-apple-darwin21.6.0"
+#      ; target = "x86_64-apple-darwin21.6.0"
 #      ; profiling = false
 #      ; flambda = false
 #      ; spacetime = false
@@ -116,25 +123,7 @@ $ /home/aaronbabu/.opam/cs3110-2023sp/bin/ocamlc.opt -config > /tmp/dune_b0b895_
 #      ; windows_unicode = false
 #      }
 #  }
-$ (cd _build/default && /home/aaronbabu/.opam/cs3110-2023sp/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I battleship/src/.battleship.eobjs/byte -I battleship/src/.battleship.eobjs/native -intf-suffix .ml -no-alias-deps -opaque -open Dune__exe -o battleship/src/.battleship.eobjs/native/dune__exe__Battleship.cmx -c -impl battleship/src/battleship.ml)
-> File "battleship/src/battleship.ml", line 18, characters 8-17:
-> 18 | let rec print_row row: unit = (*print_string "|__|";*) 
->              ^^^^^^^^^
-> Error (warning 39 [unused-rec-flag]): unused rec flag.
-> File "battleship/src/battleship.ml", line 2, characters 4-12:
-> 2 | let num_rows = 10
->         ^^^^^^^^
-> Error (warning 32 [unused-value-declaration]): unused value num_rows.
-> File "battleship/src/battleship.ml", line 3, characters 4-12:
-> 3 | let num_cols = 10
->         ^^^^^^^^
-> Error (warning 32 [unused-value-declaration]): unused value num_cols.
-> File "battleship/src/battleship.ml", line 10, characters 4-5:
-> 10 | |h::t->Array.length h
->          ^
-> Error (warning 27 [unused-var-strict]): unused variable t.
-> File "battleship/src/battleship.ml", line 56, characters 4-13:
-> 56 | let make_play= print_column_label grid; print_grid grid 1
->          ^^^^^^^^^
-> Error (warning 32 [unused-value-declaration]): unused value make_play.
-[2]
+$ (cd _build/default && /Users/caitlyncahill/.opam/cs3110-2023sp/bin/ocamldep.opt -modules -impl battleship/src/battleship.ml) > _build/default/battleship/src/.battleship.eobjs/battleship.ml.d
+$ (cd _build/default && /Users/caitlyncahill/.opam/cs3110-2023sp/bin/ocamlc.opt -w +a-4-6-7-9-27-29-30-32..42-44-45-48-50-60-66..70 -warn-error -a+31 -g -bin-annot -I battleship/src/.battleship.eobjs/byte -no-alias-deps -opaque -open Dune__exe -o battleship/src/.battleship.eobjs/byte/dune__exe__Battleship.cmi -c -intf battleship/src/battleship.mli)
+$ (cd _build/default && /Users/caitlyncahill/.opam/cs3110-2023sp/bin/ocamlopt.opt -w +a-4-6-7-9-27-29-30-32..42-44-45-48-50-60-66..70 -warn-error -a+31 -g -I battleship/src/.battleship.eobjs/byte -I battleship/src/.battleship.eobjs/native -intf-suffix .ml -no-alias-deps -opaque -open Dune__exe -o battleship/src/.battleship.eobjs/native/dune__exe__Battleship.cmx -c -impl battleship/src/battleship.ml)
+$ (cd _build/default && /Users/caitlyncahill/.opam/cs3110-2023sp/bin/ocamlopt.opt -w +a-4-6-7-9-27-29-30-32..42-44-45-48-50-60-66..70 -warn-error -a+31 -g -o battleship/src/battleship.exe battleship/src/.battleship.eobjs/native/dune__exe.cmx battleship/src/.battleship.eobjs/native/dune__exe__Battleship.cmx)
