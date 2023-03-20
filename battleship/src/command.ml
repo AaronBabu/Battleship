@@ -1,4 +1,4 @@
-type object_phrase = string list
+type object_phrase = string * string
 
 type command =
   | Shoot of object_phrase
@@ -7,20 +7,17 @@ type command =
 exception Empty
 exception Malformed
 
-let string_to_list string : string list =
+let string_to_command string : command =
   let start_lst = String.split_on_char ' ' string in
   let end_list = List.filter (fun x -> String.length x != 0) start_lst in
   match end_list with
   | [] -> raise Empty
-  | _ -> end_list
-
-let change_command (lst : string list) =
-  let com_list = List.nth lst 0 in
-  match com_list with
-  | "shoot" -> Shoot (List.tl lst)
-  | "quit" -> Quit
+  | [ "quit" ] -> Quit
+  | "shoot" :: tl1 :: tl2 -> Shoot (tl1, List.hd tl2)
   | _ -> raise Malformed
 
-let parse str =
-  let parse_lst = string_to_list str in
-  change_command parse_lst
+(* let change_command (tuple : string * string) = let com_list = List.nth lst 0
+   in match com_list with | "shoot" -> Shoot (List.nth lst 1, List.nth lst 2) |
+   "quit" -> Quit | _ -> raise Malformed *)
+
+let parse str = string_to_command str
