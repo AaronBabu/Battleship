@@ -1,5 +1,130 @@
 # dune build
 # OCAMLPARAM: unset
 # Shared cache: disabled
-# Workspace root: /Users/caitlyncahill/3110/finalproject/3110FinalProject
-# Auto-detected concurrency: 16
+# Workspace root: /home/alexatbunda/cs3110/project/3110FinalProject
+# Auto-detected concurrency: 12
+$ /home/alexatbunda/.opam/cs3110-2023sp/bin/ocamlc.opt -config > /tmp/dune_a9a002_output
+# Dune context:
+#  { name = "default"
+#  ; kind = "default"
+#  ; profile = Dev
+#  ; merlin = true
+#  ; for_host = None
+#  ; fdo_target_exe = None
+#  ; build_dir = "default"
+#  ; toplevel_path =
+#      Some External "/home/alexatbunda/.opam/cs3110-2023sp/lib/toplevel"
+#  ; ocaml_bin = External "/home/alexatbunda/.opam/cs3110-2023sp/bin"
+#  ; ocaml = Ok External "/home/alexatbunda/.opam/cs3110-2023sp/bin/ocaml"
+#  ; ocamlc = External "/home/alexatbunda/.opam/cs3110-2023sp/bin/ocamlc.opt"
+#  ; ocamlopt =
+#      Ok External "/home/alexatbunda/.opam/cs3110-2023sp/bin/ocamlopt.opt"
+#  ; ocamldep =
+#      Ok External "/home/alexatbunda/.opam/cs3110-2023sp/bin/ocamldep.opt"
+#  ; ocamlmklib =
+#      Ok External "/home/alexatbunda/.opam/cs3110-2023sp/bin/ocamlmklib.opt"
+#  ; env =
+#      map
+#        { "DUNE_OCAML_HARDCODED" : "/home/alexatbunda/.opam/cs3110-2023sp/lib"
+#        ; "DUNE_OCAML_STDLIB" :
+#            "/home/alexatbunda/.opam/cs3110-2023sp/lib/ocaml"
+#        ; "DUNE_SOURCEROOT" :
+#            "/home/alexatbunda/cs3110/project/3110FinalProject"
+#        ; "INSIDE_DUNE" :
+#            "/home/alexatbunda/cs3110/project/3110FinalProject/_build/default"
+#        ; "OCAMLFIND_IGNORE_DUPS_IN" :
+#            "/home/alexatbunda/cs3110/project/3110FinalProject/_build/install/default/lib"
+#        ; "OCAMLPATH" :
+#            "/home/alexatbunda/cs3110/project/3110FinalProject/_build/install/default/lib"
+#        ; "OCAMLTOP_INCLUDE_PATH" :
+#            "/home/alexatbunda/cs3110/project/3110FinalProject/_build/install/default/lib/toplevel"
+#        ; "OCAML_COLOR" : "always"
+#        ; "OPAMCOLOR" : "always"
+#        }
+#  ; findlib_paths = [ External "/home/alexatbunda/.opam/cs3110-2023sp/lib" ]
+#  ; arch_sixtyfour = true
+#  ; natdynlink_supported = true
+#  ; supports_shared_libraries = true
+#  ; ocaml_config =
+#      { version = "4.14.0"
+#      ; standard_library_default =
+#          "/home/alexatbunda/.opam/cs3110-2023sp/lib/ocaml"
+#      ; standard_library = "/home/alexatbunda/.opam/cs3110-2023sp/lib/ocaml"
+#      ; standard_runtime = "the_standard_runtime_variable_was_deleted"
+#      ; ccomp_type = "cc"
+#      ; c_compiler = "gcc"
+#      ; ocamlc_cflags =
+#          [ "-O2"; "-fno-strict-aliasing"; "-fwrapv"; "-pthread"; "-fPIC" ]
+#      ; ocamlc_cppflags = [ "-D_FILE_OFFSET_BITS=64" ]
+#      ; ocamlopt_cflags =
+#          [ "-O2"; "-fno-strict-aliasing"; "-fwrapv"; "-pthread"; "-fPIC" ]
+#      ; ocamlopt_cppflags = [ "-D_FILE_OFFSET_BITS=64" ]
+#      ; bytecomp_c_compiler =
+#          [ "gcc"
+#          ; "-O2"
+#          ; "-fno-strict-aliasing"
+#          ; "-fwrapv"
+#          ; "-pthread"
+#          ; "-fPIC"
+#          ; "-D_FILE_OFFSET_BITS=64"
+#          ]
+#      ; bytecomp_c_libraries = [ "-lm"; "-lpthread" ]
+#      ; native_c_compiler =
+#          [ "gcc"
+#          ; "-O2"
+#          ; "-fno-strict-aliasing"
+#          ; "-fwrapv"
+#          ; "-pthread"
+#          ; "-fPIC"
+#          ; "-D_FILE_OFFSET_BITS=64"
+#          ]
+#      ; native_c_libraries = [ "-lm" ]
+#      ; native_pack_linker = [ "ld"; "-r"; "-o" ]
+#      ; cc_profile = []
+#      ; architecture = "amd64"
+#      ; model = "default"
+#      ; int_size = 63
+#      ; word_size = 64
+#      ; system = "linux"
+#      ; asm = [ "as" ]
+#      ; asm_cfi_supported = true
+#      ; with_frame_pointers = false
+#      ; ext_exe = ""
+#      ; ext_obj = ".o"
+#      ; ext_asm = ".s"
+#      ; ext_lib = ".a"
+#      ; ext_dll = ".so"
+#      ; os_type = "Unix"
+#      ; default_executable_name = "a.out"
+#      ; systhread_supported = true
+#      ; host = "x86_64-pc-linux-gnu"
+#      ; target = "x86_64-pc-linux-gnu"
+#      ; profiling = false
+#      ; flambda = false
+#      ; spacetime = false
+#      ; safe_string = true
+#      ; exec_magic_number = "Caml1999X031"
+#      ; cmi_magic_number = "Caml1999I031"
+#      ; cmo_magic_number = "Caml1999O031"
+#      ; cma_magic_number = "Caml1999A031"
+#      ; cmx_magic_number = "Caml1999Y031"
+#      ; cmxa_magic_number = "Caml1999Z031"
+#      ; ast_impl_magic_number = "Caml1999M031"
+#      ; ast_intf_magic_number = "Caml1999N031"
+#      ; cmxs_magic_number = "Caml1999D031"
+#      ; cmt_magic_number = "Caml1999T031"
+#      ; natdynlink_supported = true
+#      ; supports_shared_libraries = true
+#      ; windows_unicode = false
+#      }
+#  }
+$ (cd _build/default && /home/alexatbunda/.opam/cs3110-2023sp/bin/ocamldep.opt -modules -intf src/state.mli) > _build/default/src/.lib.objs/state.mli.d
+$ (cd _build/default && /home/alexatbunda/.opam/cs3110-2023sp/bin/ocamlc.opt -w +a-4-6-7-9-27-29-30-32..42-44-45-48-50-60-66..70 -warn-error -a+31 -g -bin-annot -I src/.lib.objs/byte -no-alias-deps -opaque -open Lib -o src/.lib.objs/byte/lib__State.cmi -c -intf src/state.mli)
+$ (cd _build/default && /home/alexatbunda/.opam/cs3110-2023sp/bin/ocamlc.opt -w +a-4-6-7-9-27-29-30-32..42-44-45-48-50-60-66..70 -warn-error -a+31 -g -bin-annot -I test/.main.eobjs/byte -I src/.lib.objs/byte -no-alias-deps -opaque -o test/.main.eobjs/byte/dune__exe__Main.cmi -c -intf test/main.mli)
+$ (cd _build/default && /home/alexatbunda/.opam/cs3110-2023sp/bin/ocamlc.opt -w +a-4-6-7-9-27-29-30-32..42-44-45-48-50-60-66..70 -warn-error -a+31 -g -bin-annot -I src/.lib.objs/byte -intf-suffix .ml -no-alias-deps -opaque -open Lib -o src/.lib.objs/byte/lib__State.cmo -c -impl src/state.ml)
+$ (cd _build/default && /home/alexatbunda/.opam/cs3110-2023sp/bin/ocamlc.opt -w +a-4-6-7-9-27-29-30-32..42-44-45-48-50-60-66..70 -warn-error -a+31 -g -a -o src/lib.cma src/.lib.objs/byte/lib.cmo src/.lib.objs/byte/lib__Battleship.cmo src/.lib.objs/byte/lib__State.cmo src/.lib.objs/byte/lib__Command.cmo)
+$ (cd _build/default && /home/alexatbunda/.opam/cs3110-2023sp/bin/ocamlopt.opt -w +a-4-6-7-9-27-29-30-32..42-44-45-48-50-60-66..70 -warn-error -a+31 -g -I src/.lib.objs/byte -I src/.lib.objs/native -intf-suffix .ml -no-alias-deps -opaque -open Lib -o src/.lib.objs/native/lib__State.cmx -c -impl src/state.ml)
+$ (cd _build/default && /home/alexatbunda/.opam/cs3110-2023sp/bin/ocamlopt.opt -w +a-4-6-7-9-27-29-30-32..42-44-45-48-50-60-66..70 -warn-error -a+31 -g -I test/.main.eobjs/byte -I test/.main.eobjs/native -I src/.lib.objs/byte -I src/.lib.objs/native -intf-suffix .ml -no-alias-deps -opaque -o test/.main.eobjs/native/dune__exe__Main.cmx -c -impl test/main.ml)
+$ (cd _build/default && /home/alexatbunda/.opam/cs3110-2023sp/bin/ocamlopt.opt -w +a-4-6-7-9-27-29-30-32..42-44-45-48-50-60-66..70 -warn-error -a+31 -g -a -o src/lib.cmxa src/.lib.objs/native/lib.cmx src/.lib.objs/native/lib__Battleship.cmx src/.lib.objs/native/lib__State.cmx src/.lib.objs/native/lib__Command.cmx)
+$ (cd _build/default && /home/alexatbunda/.opam/cs3110-2023sp/bin/ocamlopt.opt -w +a-4-6-7-9-27-29-30-32..42-44-45-48-50-60-66..70 -warn-error -a+31 -g -shared -linkall -I src -o src/lib.cmxs src/lib.cmxa)
+$ (cd _build/default && /home/alexatbunda/.opam/cs3110-2023sp/bin/ocamlopt.opt -w +a-4-6-7-9-27-29-30-32..42-44-45-48-50-60-66..70 -warn-error -a+31 -g -o test/main.exe src/lib.cmxa test/.main.eobjs/native/dune__exe__Main.cmx)
