@@ -1,0 +1,33 @@
+---
+# Members of your group.
+group:
+  - name: Caitlyn Cahill
+    netid: crc258
+  - name: Alexa Bunda
+    netid: abt53
+  - name: Aaron Babu
+    netid: ab2458
+  - name: Aiman Mobhani
+    netid: amm492
+# Your PM.
+pm:
+  name: Cathryn Li
+  netid: cl893
+# Set to false if you don't want your gallery entry to be public.
+publish: public
+# Pithy title
+title: "Battleships"
+# OK if this is a Cornell Github link, but public gallery viewers won't be able to see it.
+git-repo: "https://github.com/AaronBabu/Battleship"
+# If you have no demo screencast, replace the url string with an empty string ""
+demo-video-url: ""
+# Write a short, attention-grabbing description of your project.
+desc: >
+  Our project is an interactive calculator. It supports standard mathematical
+  operations like addition, multiplication, negation, and division on both
+  integers and floating-point numbers. The interface is completely
+  programmable--new functions can easily be defined and assigned to new "keys"
+  in the visual interface.
+
+  Standard visual I/O is supported, but the calculator can also emit sound. By
+  pressing down a special key, it can play a little melody.
