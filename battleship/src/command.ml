@@ -14,7 +14,7 @@ let string_to_list string :string list =
    | [] -> raise Empty
    | _ -> end_list
 
-let change_command lst: string list = 
+let change_command (lst: string list) = 
   let com_list = List.nth lst 0 in 
   match com_list with
   | "shoot" -> Shoot (List.tl lst)

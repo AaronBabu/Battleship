@@ -6,11 +6,11 @@ type object_phrase = string * string
     internal, or trailing spaces. The list is in the same order as the words in
     the original player command. For example:
 
-    - If the player command is ["shoot a3"], then the object phrase is
-      [("a", "3")].
+    - If the player command is ["shoot A3"], then the object phrase is
+      [("A", "3")].
 
-    - If the player command is ["shoot   a3     "], then the object phrase is
-      again [("a", "3")]. *)
+    - If the player command is ["shoot   A3     "], then the object phrase is
+      again [("A", "3")]. *)
 
 (** The type [command] represents a player command that is decomposed into a
     verb and possibly an object phrase. Invariant: the [object_phrase] carried
@@ -30,7 +30,7 @@ val parse : string -> command
     word (i.e., consecutive sequence of non-space characters) of [str] becomes
     the verb. The rest, if any, become the object phrase. Examples:
 
-    - [parse "    shoot   b4  "] is [Shoot ("b", "4")]
+    - [parse "    shoot   B4  "] is [Shoot ("B", "4")]
     - [parse "quit"] is [Quit].
 
     Requires: [str] contains only alphanumeric (A-Z, a-z, 0-9) and space
