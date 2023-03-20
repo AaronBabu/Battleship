@@ -15,7 +15,7 @@ let rec get_rowlines n acc =
 let print_rowlines n = print_string ("  " ^ get_rowlines n "" ^ "+")
 
 let rec print_row row : unit =
-  Array.iter (fun x -> print_string ("| " ^ x ^ " ")) row;
+  Array.iter (fun x -> print_string ("| " ^ x ^ s " ")) row;
   print_string "|"
 
 let print_column_label array =
