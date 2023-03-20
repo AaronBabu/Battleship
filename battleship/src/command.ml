@@ -1,4 +1,4 @@
-type object_phrase = string list
+type object_phrase = string * string
 
 type command =
   | Shoot of object_phrase
@@ -6,3 +6,5 @@ type command =
 
 exception Empty
 exception Malformed
+
+let parse s = raise Not_found

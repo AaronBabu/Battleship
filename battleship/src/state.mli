@@ -7,16 +7,14 @@
 
    (Subject to change) hit = "x" miss = "o" unhit ship = "."*)
 
-type t = string list list
+type t = string array list
 (** The abtract type (string list list) of values that represent board state*)
 
-type result = Illegal of t
-
-val init_state : string list list -> t
+val init_state : t
 (** [init_state s] is the board state that [s] represents. Requires: [s] is a
-    valis string list list*)
+    valis string array list*)
 
-val new_turn : t -> string * string -> t
+val new_turn : t -> string * string -> unit
 (** [new_turn s position] is the result of new turn taken by a player given a
     state [s] and a position that is being targeted [position]. [position] will
     come in the form (string * string) where the first string is a letter and

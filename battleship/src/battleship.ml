@@ -65,4 +65,5 @@ let _ = print_grid grid 1
 
 let make_play =
   print_column_label grid;
-  print_grid grid 1
+  print_grid grid 1;
+  grid
