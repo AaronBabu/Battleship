@@ -1,10 +1,10 @@
 type object_phrase = string * string
 (** The type [object_phrase] represents the object phrase that can be part of a
     player command. Each element of the list represents a part of the object
-    phrase position, where a "position" is defined as a letter then a number. 
-    Thus, no element of the list should contain any leading,
-    internal, or trailing spaces. The list is in the same order as the words in
-    the original player command. For example:
+    phrase position, where a "position" is defined as a letter then a number.
+    Thus, no element of the list should contain any leading, internal, or
+    trailing spaces. The list is in the same order as the words in the original
+    player command. For example:
 
     - If the player command is ["shoot a3"], then the object phrase is
       [("a", "3")].
@@ -15,7 +15,7 @@ type object_phrase = string * string
 (** The type [command] represents a player command that is decomposed into a
     verb and possibly an object phrase. Invariant: the [object_phrase] carried
     by [Shoot] must not be empty. *)
-type command = 
+type command =
   | Shoot of object_phrase
   | Quit
 
@@ -25,7 +25,7 @@ exception Empty
 exception Malformed
 (** Raised when a malformed command is parsed. *)
 
-val parse : string -> command
+val parse : string -> string * string
 (** [parse str] parses a player's input into a [command], as follows. The first
     word (i.e., consecutive sequence of non-space characters) of [str] becomes
     the verb. The rest, if any, become the object phrase. Examples:
@@ -39,10 +39,5 @@ val parse : string -> command
     Raises: [Empty] if [str] is the empty string or contains only spaces.
 
     Raises: [Malformed] if the command is malformed. A command is malformed if
-        -the verb is neither "quit" nor "shoot"
-        -the object phrase is an invalid position (z19)
-        -there is an object phrase after quit like [parse "quit a4"] *)
-
-
-
-  
+    \-the verb is neither "quit" nor "shoot" -the object phrase is an invalid
+    position (z19) -there is an object phrase after quit like [parse "quit a4"] *)
