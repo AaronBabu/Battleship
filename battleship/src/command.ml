@@ -7,6 +7,7 @@ type command =
 exception Empty
 exception Malformed
 
+
 let string_to_command string : command =
   let start_lst = String.split_on_char ' ' string in
   let end_list = List.filter (fun x -> String.length x != 0) start_lst in
@@ -21,3 +22,4 @@ let string_to_command string : command =
    "quit" -> Quit | _ -> raise Malformed *)
 
 let parse str = string_to_command str
+
