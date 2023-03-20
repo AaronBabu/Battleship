@@ -7,6 +7,8 @@
 
    (Subject to change) hit = "x" miss = "o" unhit ship = "."*)
 
+exception Illegal
+
 type t = string array list
 (** The abtract type (string list list) of values that represent board state*)
 
