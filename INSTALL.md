@@ -8,6 +8,7 @@ Credit for these instructions and the whole textbook goes to Cornell Professor M
 Here are the following packages that must be installed for our program to run on your machine:
 
 (list packages included here)
+OUnit
 
 You can use the command ``opam install [package name]``. If there are any other necessary packages that you were warned are missing by a
 message in terminal, you can run the command above to install them. 
