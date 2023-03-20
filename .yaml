@@ -23,11 +23,6 @@ git-repo: "https://github.com/AaronBabu/Battleship"
 demo-video-url: ""
 # Write a short, attention-grabbing description of your project.
 desc: >
-  Our project is an interactive calculator. It supports standard mathematical
-  operations like addition, multiplication, negation, and division on both
-  integers and floating-point numbers. The interface is completely
-  programmable--new functions can easily be defined and assigned to new "keys"
-  in the visual interface.
-
-  Standard visual I/O is supported, but the calculator can also emit sound. By
-  pressing down a special key, it can play a little melody.
+  Our project is a remake of the beloved game Battleships. It allows two players 
+  to place ships on the board, guess spots where the other ships are, and play back
+  and forth to shoot down the ships until one player eventually wins the game. 
