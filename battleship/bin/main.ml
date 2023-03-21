@@ -3,7 +3,32 @@ open Lib
 open Battleship
 open Command
 open State
-let play_game g = raise (Failure "Unimplemented: Main.play_game")
+
+let grid =
+  [
+    [| " "; "#"; " "; " "; " "; " "; " "; " "; " "; " " |];
+    [| " "; "#"; " "; " "; " "; " "; " "; " "; " "; " " |];
+    [| " "; "#"; " "; " "; " "; " "; " "; " "; " "; " " |];
+    [| " "; "#"; " "; " "; "#"; "#"; "#"; " "; " "; " " |];
+    [| " "; " "; " "; " "; " "; " "; " "; " "; " "; " " |];
+    [| " "; " "; " "; " "; " "; " "; " "; " "; " "; " " |];
+    [| " "; " "; " "; " "; " "; " "; "#"; " "; " "; " " |];
+    [| " "; " "; "#"; "#"; " "; " "; "#"; " "; " "; "#" |];
+    [| " "; " "; " "; " "; " "; " "; " "; " "; " "; "#" |];
+    [| " "; " "; " "; " "; " "; " "; " "; " "; " "; "#" |];
+  ]
+
+let rec play_game grid string= 
+  try
+      let move2 = parse string in 
+      new_turn grid move2;
+      print_column_label grid;
+      print_grid grid 1;
+      print_endline "\n Choose a target: \n";
+      let line = (read_line ()) in play_game grid line
+  with _ -> 
+      print_endline "\n Choose a target: \n";
+      let line = (read_line ()) in play_game grid line
 
   
     (**else if l_type = "two player" then main_two_player ()
@@ -11,14 +36,8 @@ let play_game g = raise (Failure "Unimplemented: Main.play_game")
     else failwith "Not a valid player configuration"
   with _ -> game_setting ()*)
 
-let rec main () =
-  try
-    let move =
-      print_endline "Please enter a move:";
-      read_line () in let move2 = parse move in 
-      new_turn grid move2;
-      print_column_label grid;
-      print_grid grid 1
-  with _ -> main ()
+let rec main () = 
+  print_endline "Choose a target:";
+  let line = (read_line ()) in play_game grid line
 
 let () = main ()
