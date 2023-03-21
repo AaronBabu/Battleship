@@ -14,3 +14,9 @@ You can use the command ``opam install [package name]``. If there are any other 
 message in terminal, you can run the command above to install them. 
 
 ## Make and Run
+- ``make build`` which runs dune build
+- `` make play`` cd into battleship and prompts you to make a using a command 
+move shoot space capital letter number to shoot into desired position
+- `` make utop`` which launches the toplevel with src files
+- `` make test`` to run unit tests
+- `` make linecount`` which runs `` cloc --by-file --include-lang=OCaml.``to count the number of OCaml code lines for grading purposes and also runs `` ocamlbuild --clean``, which cleans out the directory you are in including build if you'll need to build up the project again before going through the project.

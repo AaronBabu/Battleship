@@ -2,6 +2,7 @@ open OUnit2
 open Lib
 open State
 open Battleship
+open Command
 
 let grid =
   [
@@ -55,6 +56,18 @@ let new_turn_error_test (name : string) s (position : string * string)
     (expected_output : exn) : test =
   name >:: fun _ ->
   assert_raises expected_output (fun () -> new_turn s position)
+
+let parse_test (name : string) string (expected_output : string * string) : test
+    =
+  name >:: fun _ -> assert_equal expected_output (parse string)
+
+let command_tests =
+  [
+    parse_test
+      "Testing example where the players input command is shoot b4 and is \
+       being parsed"
+      " shoot b4 " ("b", "4");
+  ]
 
 let new_turn_tests = [ new_turn_test "Basic Test" grid ("B", "4") grid2 ]
 
