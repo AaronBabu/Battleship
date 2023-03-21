@@ -6,17 +6,14 @@ Credit for these instructions and the whole textbook goes to Cornell Professor M
 ## Packages
 
 Here are the following packages that must be installed for our program to run on your machine:
-
-(list packages included here)
-OUnit
+-OUnit2
 
 You can use the command ``opam install [package name]``. If there are any other necessary packages that you were warned are missing by a
 message in terminal, you can run the command above to install them. 
 
 ## Make and Run
 - ``make build`` which runs dune build
-- `` make play`` cd into battleship and prompts you to make a using a command 
-move shoot space capital letter number to shoot into desired position
-- `` make utop`` which launches the toplevel with src files
+- cd into the battleship folder 
+- `` make play`` where you first type "make play" and then choose a target by typing "SHOOT capital-letter number" (example "SHOOT B 4" to hit coordinate B4) to shoot into desired position
 - `` make test`` to run unit tests
 - `` make linecount`` which runs `` cloc --by-file --include-lang=OCaml.``to count the number of OCaml code lines for grading purposes and also runs `` ocamlbuild --clean``, which cleans out the directory you are in including build if you'll need to build up the project again before going through the project.
