@@ -23,6 +23,6 @@ git-repo: "https://github.com/AaronBabu/Battleship"
 demo-video-url: ""
 # Write a short, attention-grabbing description of your project.
 desc: >
-  Our project is a remake of the beloved game Battleships. It allows two players 
-  to place ships on the board, guess spots where the other ships are, and play back
-  and forth to shoot down the ships until one player eventually wins the game. 
+  Our project is a remake of the beloved game Battleships. It allows a player to face
+  an AI player to place ships on the board, guess spots where the other ships are, and 
+  play back and forth to shoot down the ships until one player eventually wins the game. 
