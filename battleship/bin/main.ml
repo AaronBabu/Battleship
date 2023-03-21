@@ -1,22 +1,13 @@
 (** [play_game f] starts the game with state [g]. *)
 open Lib
 open Battleship
+open AI
 open Command
 open State
 
-let grid =
-  [
-    [| " "; "#"; " "; " "; " "; " "; " "; " "; " "; " " |];
-    [| " "; "#"; " "; " "; " "; " "; " "; " "; " "; " " |];
-    [| " "; "#"; " "; " "; " "; " "; " "; " "; " "; " " |];
-    [| " "; "#"; " "; " "; "#"; "#"; "#"; " "; " "; " " |];
-    [| " "; " "; " "; " "; " "; " "; " "; " "; " "; " " |];
-    [| " "; " "; " "; " "; " "; " "; " "; " "; " "; " " |];
-    [| " "; " "; " "; " "; " "; " "; "#"; " "; " "; " " |];
-    [| " "; " "; "#"; "#"; " "; " "; "#"; " "; " "; "#" |];
-    [| " "; " "; " "; " "; " "; " "; " "; " "; " "; "#" |];
-    [| " "; " "; " "; " "; " "; " "; " "; " "; " "; "#" |];
-  ]
+let reset_board () =
+  let new_grid = List.map (fun row -> Array.copy row) randomgrid in
+  new_grid
 
 let rec play_game grid string= 
   try
@@ -30,13 +21,8 @@ let rec play_game grid string=
       print_endline "\n Choose a target: \n";
       let line = (read_line ()) in play_game grid line
 
-  
-    (**else if l_type = "two player" then main_two_player ()
-    else if l_type = "quit" then (print_endline("Goodbye!"); exit 0;)
-    else failwith "Not a valid player configuration"
-  with _ -> game_setting ()*)
-
-let rec main () = 
+let main () =
+  let grid = reset_board () in
   print_endline "Choose a target:";
   let line = (read_line ()) in play_game grid line
 
