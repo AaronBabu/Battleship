@@ -68,14 +68,3 @@ let make_play =
   print_grid grid 1;
   grid
 
-type ship =
-  | Ship1
-  | Ship2
-  | Ship3
-  | Ship4
-  | Ship5
-
-type ships = {
-  ship : ship;
-  length : int;
-}
