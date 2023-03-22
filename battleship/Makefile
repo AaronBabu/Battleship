@@ -23,6 +23,9 @@ check:
 finalcheck:
 	@bash check.sh final
 
+cloc: 
+	cloc --by-file --include-lang=OCaml .
+
 zip:
 	rm -f adventure.zip
 	zip -r adventure.zip . -x@exclude.lst
@@ -36,3 +39,5 @@ doc:
 
 opendoc: doc
 	@bash opendoc.sh
+
+
