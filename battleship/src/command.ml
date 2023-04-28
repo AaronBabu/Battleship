@@ -13,7 +13,7 @@ exception Quit
 let parse string : string * string =
   let start_lst = String.split_on_char ' ' string in
   let end_list = List.filter (fun x -> String.length x != 0) start_lst in
-  let m_list = List.map String.lowercase_ascii end_list in
+  let m_list = List.map (fun x -> String.lowercase_ascii x) end_list in
   match m_list with
   | [] -> raise Empty
   | [ "quit" ] -> raise Quit 
