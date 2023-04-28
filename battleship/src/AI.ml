@@ -29,10 +29,10 @@ let randomgrid =
 
 let () = Random.self_init ()
 let ywing = { ship = Ship1; length = 2 }
-let xwing = { ship = Ship2; length = 3 }
+let xwing = { ship = Ship2; length = 2 }
 let mfalcon = { ship = Ship3; length = 3 }
-let delta7 = { ship = Ship4; length = 4 }
-let stardestroyer = { ship = Ship5; length = 5 }
+let delta7 = { ship = Ship4; length = 3 }
+let stardestroyer = { ship = Ship5; length = 4 }
 let shipList = [ ywing; xwing; mfalcon; delta7; stardestroyer ]
 
 let letter_randomizer () =
