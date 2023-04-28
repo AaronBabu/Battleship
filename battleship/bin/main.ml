@@ -41,3 +41,16 @@ let main () =
   play_game grid1 grid2 line
 
 let () = main ()
+
+let instructions () = print_string "Hello and welcome to Battleship!";
+print_string "Before you start your battle we must run you through everything you as a player need to know.
+To start off:
+ The objective of the game is to sink all 5 of your opponent's ships.
+You are going to choose where you would like to place all 5 of your ships.
+Everyone's ships may be placed horizontally or vertically, but never diagonally.
+These ships will all be of different lengths. One will be of length 2, two of length 3, 
+one of length 4, one of length 5.
+You must hit all parts of the ship to get a point.
+However, you do not know where your opponent's ships are located, 
+this is where the fun begins.
+You have ammo that can be shot at any coordinate on your opponent's board."
