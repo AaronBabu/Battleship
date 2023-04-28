@@ -86,8 +86,8 @@ let inverse_char_code (index : int) : char =
   let code = index + 65 in
   Char.chr code
 
-let place_shiplength_2 (direction : direction) ((char, int) : char * int) :
-    char * int =
+let create_endcoords_shiplength2 (direction : direction)
+    ((char, int) : char * int) : char * int =
   match (direction, char, int) with
   | Left, _, _ ->
       let new_char_int = Char.code char - 2 in
@@ -104,8 +104,8 @@ let place_shiplength_2 (direction : direction) ((char, int) : char * int) :
       let new_int = int - 2 in
       (char, new_int)
 
-let place_shiplength_3 (direction : direction) ((char, int) : char * int) :
-    char * int =
+let create_endcoords_shiplength3 (direction : direction)
+    ((char, int) : char * int) : char * int =
   match (direction, char, int) with
   | Left, _, _ ->
       let new_char_int = Char.code char - 3 in
@@ -122,8 +122,8 @@ let place_shiplength_3 (direction : direction) ((char, int) : char * int) :
       let new_int = int - 3 in
       (char, new_int)
 
-let place_shiplength_4 (direction : direction) ((char, int) : char * int) :
-    char * int =
+let create_endcoords_shiplength4 (direction : direction)
+    ((char, int) : char * int) : char * int =
   match (direction, char, int) with
   | Left, _, _ ->
       let new_char_int = Char.code char - 4 in
@@ -140,8 +140,8 @@ let place_shiplength_4 (direction : direction) ((char, int) : char * int) :
       let new_int = int - 4 in
       (char, new_int)
 
-let place_shiplength_5 (direction : direction) ((char, int) : char * int) :
-    char * int =
+let create_endcoords_shiplength5 (direction : direction)
+    ((char, int) : char * int) : char * int =
   match (direction, char, int) with
   | Left, _, _ ->
       let new_char_int = Char.code char - 5 in
@@ -157,3 +157,91 @@ let place_shiplength_5 (direction : direction) ((char, int) : char * int) :
   | Down, _, _ ->
       let new_int = int - 5 in
       (char, new_int)
+
+let print_ship start_row start_col end_row end_col =
+  [
+    for x = start_row to end_row do
+      for y = start_col to end_col do
+        let row_arr = List.nth player_grid x in
+        row_arr.(y) <- "#"
+      done
+    done;
+  ]
+
+let print_ship1 (direction : direction) ((char, int) : char * int) =
+  [
+    (let start_col = Char.code char - 65 in
+     let start_row = int in
+     let end_col, end_row =
+       create_endcoords_shiplength2 direction (char, int)
+     in
+     let new_end_col = Char.code end_col - 65 in
+     let ship1_start_row = start_row in
+     let ship1_start_col = start_col in
+     let ship1_end_row = end_row in
+     let ship1_end_col = new_end_col in
+     print_ship ship1_start_row ship1_start_col ship1_end_row ship1_end_col);
+  ]
+
+let print_ship2 (direction : direction) ((char, int) : char * int) =
+  [
+    (let start_col = Char.code char - 65 in
+     let start_row = int in
+     let end_col, end_row =
+       create_endcoords_shiplength3 direction (char, int)
+     in
+     let new_end_col = Char.code end_col - 65 in
+     let ship2_start_row = start_row in
+     let ship2_start_col = start_col in
+     let ship2_end_row = end_row in
+     let ship2_end_col = new_end_col in
+     print_ship ship2_start_row ship2_start_col ship2_end_row ship2_end_col);
+  ]
+
+let print_ship3 (direction : direction) ((char, int) : char * int) =
+  [
+    (let start_col = Char.code char - 65 in
+     let start_row = int in
+     let end_col, end_row =
+       create_endcoords_shiplength2 direction (char, int)
+     in
+     let new_end_col = Char.code end_col - 65 in
+     let ship3_start_row = start_row in
+     let ship3_start_col = start_col in
+     let ship3_end_row = end_row in
+     let ship3_end_col = new_end_col in
+     print_ship ship3_start_row ship3_start_col ship3_end_row ship3_end_col);
+  ]
+
+let print_ship4 (direction : direction) ((char, int) : char * int) =
+  [
+    (let start_col = Char.code char - 65 in
+     let start_row = int in
+     let end_col, end_row =
+       create_endcoords_shiplength4 direction (char, int)
+     in
+     let new_end_col = Char.code end_col - 65 in
+     let ship4_start_row = start_row in
+     let ship4_start_col = start_col in
+     let ship4_end_row = end_row in
+     let ship4_end_col = new_end_col in
+     print_ship ship4_start_row ship4_start_col ship4_end_row ship4_end_col);
+  ]
+
+let print_ship5 (direction : direction) ((char, int) : char * int) =
+  [
+    (let start_col = Char.code char - 65 in
+     let start_row = int in
+     let end_col, end_row =
+       create_endcoords_shiplength5 direction (char, int)
+     in
+     let new_end_col = Char.code end_col - 65 in
+     let ship5_start_row = start_row in
+     let ship5_start_col = start_col in
+     let ship5_end_row = end_row in
+     let ship5_end_col = new_end_col in
+     print_ship ship5_start_row ship5_start_col ship5_end_row ship5_end_col);
+  ]
+
+(* let _ = print_ship4 Left ('b', 4) *)
+(* let _ = print_ship 2 2 3 2 *)
