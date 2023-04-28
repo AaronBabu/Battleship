@@ -6,6 +6,9 @@ type command =
 
 exception Empty
 exception Malformed
+exception Quit 
+
+
 
 let parse string : string * string =
   let start_lst = String.split_on_char ' ' string in
@@ -13,9 +16,17 @@ let parse string : string * string =
   let m_list = List.map String.lowercase_ascii end_list in
   match m_list with
   | [] -> raise Empty
-  | [ "quit" ] -> ("a", "b")
+  | [ "quit" ] -> raise Quit 
   | "shoot" :: tl1 :: tl2 -> (tl1, List.hd tl2)
   | _ -> raise Malformed
+
+(* let quit string = 
+  let start_lst = String.split_on_char ' ' string in
+  let end_list = List.filter (fun x -> String.length x != 0) start_lst in
+  match end_list with
+  | [] -> raise Empty
+  | [ "quit" ] -> "\003"
+  |  *)
 
 (* let change_command (tuple : string * string) = let com_list = List.nth lst 0
    in match com_list with | "shoot" -> Shoot (List.nth lst 1, List.nth lst 2) |
