@@ -82,31 +82,45 @@ type direction =
   | Up
   | Down
 
-let index (c : char) : int = Char.code c - Char.code 'A'
-let inverse_index (i : int) : char = Char.chr (i + Char.code 'A')
+let inverse_char_code (index : int) : char =
+  let code = index + 65 in
+  Char.chr code
 
 let create_endcoords_shiplength2 (direction : direction)
     ((char, int) : char * int) : char * int =
   match (direction, char, int) with
   | Left, _, _ ->
+<<<<<<< HEAD
       let new_char_int = index char - 1 in
       let new_char = inverse_index new_char_int in
+=======
+      let new_char_int = Char.code char - 2 in
+      let new_char = inverse_char_code new_char_int in
+>>>>>>> added quitting, got rid of command file
       (new_char, int)
   | Right, _, _ ->
-      let new_char_int = index char + 2 in
-      let new_char = inverse_index new_char_int in
+      let new_char_int = Char.code char + 2 in
+      let new_char = inverse_char_code new_char_int in
       (new_char, int)
   | Up, _, _ ->
+<<<<<<< HEAD
       let new_int = int - 1 in
       (char, new_int)
   | Down, _, _ ->
       let new_int = int + 1 in
+=======
+      let new_int = int + 2 in
+      (char, new_int)
+  | Down, _, _ ->
+      let new_int = int - 2 in
+>>>>>>> added quitting, got rid of command file
       (char, new_int)
 
 let create_endcoords_shiplength3 (direction : direction)
     ((char, int) : char * int) : char * int =
   match (direction, char, int) with
   | Left, _, _ ->
+<<<<<<< HEAD
       let new_char_int = index char - 2 in
       let new_char = inverse_index new_char_int in
       (new_char, int)
@@ -119,12 +133,27 @@ let create_endcoords_shiplength3 (direction : direction)
       (char, new_int)
   | Down, _, _ ->
       let new_int = int + 2 in
+=======
+      let new_char_int = Char.code char - 3 in
+      let new_char = inverse_char_code new_char_int in
+      (new_char, int)
+  | Right, _, _ ->
+      let new_char_int = Char.code char + 3 in
+      let new_char = inverse_char_code new_char_int in
+      (new_char, int)
+  | Up, _, _ ->
+      let new_int = int + 3 in
+      (char, new_int)
+  | Down, _, _ ->
+      let new_int = int - 3 in
+>>>>>>> added quitting, got rid of command file
       (char, new_int)
 
 let create_endcoords_shiplength4 (direction : direction)
     ((char, int) : char * int) : char * int =
   match (direction, char, int) with
   | Left, _, _ ->
+<<<<<<< HEAD
       let new_char_int = index char - 3 in
       let new_char = inverse_index new_char_int in
       (new_char, int)
@@ -137,12 +166,27 @@ let create_endcoords_shiplength4 (direction : direction)
       (char, new_int)
   | Down, _, _ ->
       let new_int = int + 3 in
+=======
+      let new_char_int = Char.code char - 4 in
+      let new_char = inverse_char_code new_char_int in
+      (new_char, int)
+  | Right, _, _ ->
+      let new_char_int = Char.code char + 4 in
+      let new_char = inverse_char_code new_char_int in
+      (new_char, int)
+  | Up, _, _ ->
+      let new_int = int + 4 in
+      (char, new_int)
+  | Down, _, _ ->
+      let new_int = int - 4 in
+>>>>>>> added quitting, got rid of command file
       (char, new_int)
 
 let create_endcoords_shiplength5 (direction : direction)
     ((char, int) : char * int) : char * int =
   match (direction, char, int) with
   | Left, _, _ ->
+<<<<<<< HEAD
       let new_char_int = index char - 4 in
       let new_char = inverse_index new_char_int in
       (new_char, int)
@@ -155,10 +199,25 @@ let create_endcoords_shiplength5 (direction : direction)
       (char, new_int)
   | Down, _, _ ->
       let new_int = int + 4 in
+=======
+      let new_char_int = Char.code char - 5 in
+      let new_char = inverse_char_code new_char_int in
+      (new_char, int)
+  | Right, _, _ ->
+      let new_char_int = Char.code char + 5 in
+      let new_char = inverse_char_code new_char_int in
+      (new_char, int)
+  | Up, _, _ ->
+      let new_int = int + 5 in
+      (char, new_int)
+  | Down, _, _ ->
+      let new_int = int - 5 in
+>>>>>>> added quitting, got rid of command file
       (char, new_int)
 
 let print_ship start_row start_col end_row end_col =
   [
+<<<<<<< HEAD
     (if end_col > start_col || end_row > start_row then
      for x = start_row - 1 to end_row - 1 do
        for y = start_col to end_col do
@@ -173,18 +232,26 @@ let print_ship start_row start_col end_row end_col =
          row_arr.(y) <- "#"
        done
      done);
+=======
+    for x = start_row to end_row do
+      for y = start_col to end_col do
+        let row_arr = List.nth player_grid x in
+        row_arr.(y) <- "#"
+      done
+    done;
+>>>>>>> added quitting, got rid of command file
   ]
 
 let print_ship1 (direction : direction) ((char, int) : char * int) =
   [
-    (let start_col = index char in
+    (let start_col = Char.code char - 65 in
      let start_row = int in
      print_int start_col;
      print_int start_row;
      let end_col, end_row =
        create_endcoords_shiplength2 direction (char, int)
      in
-     let new_end_col = index end_col in
+     let new_end_col = Char.code end_col - 65 in
      let ship1_start_row = start_row in
      let ship1_start_col = start_col in
      let ship1_end_row = end_row in
@@ -196,12 +263,12 @@ let print_ship1 (direction : direction) ((char, int) : char * int) =
 
 let print_ship2 (direction : direction) ((char, int) : char * int) =
   [
-    (let start_col = index char in
+    (let start_col = Char.code char - 65 in
      let start_row = int in
      let end_col, end_row =
        create_endcoords_shiplength3 direction (char, int)
      in
-     let new_end_col = index end_col in
+     let new_end_col = Char.code end_col - 65 in
      let ship2_start_row = start_row in
      let ship2_start_col = start_col in
      let ship2_end_row = end_row in
@@ -211,12 +278,12 @@ let print_ship2 (direction : direction) ((char, int) : char * int) =
 
 let print_ship3 (direction : direction) ((char, int) : char * int) =
   [
-    (let start_col = index char in
+    (let start_col = Char.code char - 65 in
      let start_row = int in
      let end_col, end_row =
        create_endcoords_shiplength2 direction (char, int)
      in
-     let new_end_col = index end_col in
+     let new_end_col = Char.code end_col - 65 in
      let ship3_start_row = start_row in
      let ship3_start_col = start_col in
      let ship3_end_row = end_row in
@@ -226,12 +293,12 @@ let print_ship3 (direction : direction) ((char, int) : char * int) =
 
 let print_ship4 (direction : direction) ((char, int) : char * int) =
   [
-    (let start_col = index char in
+    (let start_col = Char.code char - 65 in
      let start_row = int in
      let end_col, end_row =
        create_endcoords_shiplength4 direction (char, int)
      in
-     let new_end_col = index end_col in
+     let new_end_col = Char.code end_col - 65 in
      let ship4_start_row = start_row in
      let ship4_start_col = start_col in
      let ship4_end_row = end_row in
@@ -241,12 +308,12 @@ let print_ship4 (direction : direction) ((char, int) : char * int) =
 
 let print_ship5 (direction : direction) ((char, int) : char * int) =
   [
-    (let start_col = index char in
+    (let start_col = Char.code char - 65 in
      let start_row = int in
      let end_col, end_row =
        create_endcoords_shiplength5 direction (char, int)
      in
-     let new_end_col = index end_col in
+     let new_end_col = Char.code end_col - 65 in
      let ship5_start_row = start_row in
      let ship5_start_col = start_col in
      let ship5_end_row = end_row in
@@ -254,6 +321,11 @@ let print_ship5 (direction : direction) ((char, int) : char * int) =
      print_ship ship5_start_row ship5_start_col ship5_end_row ship5_end_col);
   ]
 
+<<<<<<< HEAD
 (* let _ = print_ship4 Right ('B', 4) let _ = print_ship1 Left ('E', 7) let _ =
    print_ship2 Down ('A', 1) let _ = print_ship3 Up ('D', 10) let _ =
    print_ship5 Left ('H', 3) *)
+=======
+(* let _ = print_ship4 Left ('b', 4) *)
+(* let _ = print_ship 2 2 3 2 *)
+>>>>>>> added quitting, got rid of command file

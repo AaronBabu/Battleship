@@ -3,8 +3,27 @@ open Lib
 
 open Battleship
 open AI
-open Command
 open State
+
+type object_phrase = string * string
+
+type command =
+  | Shoot of object_phrase
+
+exception Empty
+exception Malformed
+exception Quit
+
+let parse string : string * string =
+  let start_lst = String.split_on_char ' ' string in
+  let end_list = List.filter (fun x -> String.length x != 0) start_lst in
+  let m_list = List.map (fun x -> String.lowercase_ascii x) end_list in
+  match m_list with
+  | [] -> raise Empty
+  | [ "quit" ] -> raise Quit
+  | "shoot" :: tl1 :: tl2 -> (tl1, List.hd tl2)
+  | _ -> raise Malformed
+
 
 let reset_board () =
   let new_grid = List.map (fun row -> Array.copy row) randomgrid in
@@ -27,7 +46,9 @@ let rec play_game grid grid2 string =
     print_endline "\n Choose a target: \n";
     let line = read_line () in
     play_game grid grid2 line
-  with _ ->
+  with
+  | Quit -> print_endline "Quitting"
+  | _ ->
     print_endline "\n Choose a target: \n";
     let line = read_line () in
     play_game grid grid2 line
