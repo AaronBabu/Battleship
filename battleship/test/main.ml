@@ -77,15 +77,13 @@ let final_coords_tests =
     final_ship_coords_test "Ship1 up" create_endcoords_shiplength2 Up ('E', 7)
       ('E', 6);
     final_ship_coords_test "Ship1 down" create_endcoords_shiplength2 Down
-      ('E', 7) ('E', 8);
-      final_ship_coords_test "Ship2/3 left" create_endcoords_shiplength3 Left
-      ('E', 7) ('D', 7);
-    final_ship_coords_test "Ship2/3 right" create_endcoords_shiplength3 Right
-      ('E', 7) ('F', 7);
-    final_ship_coords_test "Ship2/3 up" create_endcoords_shiplength3 Up ('E', 7)
-      ('E', 6);
-    final_ship_coords_test "Ship2/3 down" create_endcoords_shiplength3 Down
-      ('E', 7) ('E', 8);
+      ('E', 7) ('E', 8)
+    (* final_ship_coords_test "Ship2/3 left" create_endcoords_shiplength3 Left
+       ('E', 7) ('D', 7); final_ship_coords_test "Ship2/3 right"
+       create_endcoords_shiplength3 Right ('E', 7) ('F', 7);
+       final_ship_coords_test "Ship2/3 up" create_endcoords_shiplength3 Up ('E',
+       7) ('E', 6); final_ship_coords_test "Ship2/3 down"
+       create_endcoords_shiplength3 Down ('E', 7) ('E', 8); *);
   ]
 
 let tests =

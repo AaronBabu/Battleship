@@ -82,9 +82,8 @@ type direction =
   | Up
   | Down
 
-let inverse_char_code (index : int) : char =
-  let code = index + 65 in
-  Char.chr code
+let index (c : char) : int = Char.code c - Char.code 'A'
+let inverse_index (i : int) : char = Char.chr (i + Char.code 'A')
 
 let create_endcoords_shiplength2 (direction : direction)
     ((char, int) : char * int) : char * int =
