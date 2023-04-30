@@ -89,6 +89,24 @@ let create_endcoords_shiplength2 (direction : direction)
     ((char, int) : char * int) : char * int =
   match (direction, char, int) with
   | Left, _, _ ->
+      let new_char_int = index char - 1 in
+      let new_char = inverse_index new_char_int in
+      (new_char, int)
+  | Right, _, _ ->
+      let new_char_int = index char + 2 in
+      let new_char = inverse_index new_char_int in
+      (new_char, int)
+  | Up, _, _ ->
+      let new_int = int - 1 in
+      (char, new_int)
+  | Down, _, _ ->
+      let new_int = int + 1 in
+      (char, new_int)
+
+let create_endcoords_shiplength3 (direction : direction)
+    ((char, int) : char * int) : char * int =
+  match (direction, char, int) with
+  | Left, _, _ ->
       let new_char_int = index char - 2 in
       let new_char = inverse_index new_char_int in
       (new_char, int)
@@ -103,7 +121,7 @@ let create_endcoords_shiplength2 (direction : direction)
       let new_int = int + 2 in
       (char, new_int)
 
-let create_endcoords_shiplength3 (direction : direction)
+let create_endcoords_shiplength4 (direction : direction)
     ((char, int) : char * int) : char * int =
   match (direction, char, int) with
   | Left, _, _ ->
@@ -121,7 +139,7 @@ let create_endcoords_shiplength3 (direction : direction)
       let new_int = int + 3 in
       (char, new_int)
 
-let create_endcoords_shiplength4 (direction : direction)
+let create_endcoords_shiplength5 (direction : direction)
     ((char, int) : char * int) : char * int =
   match (direction, char, int) with
   | Left, _, _ ->
@@ -129,7 +147,7 @@ let create_endcoords_shiplength4 (direction : direction)
       let new_char = inverse_index new_char_int in
       (new_char, int)
   | Right, _, _ ->
-      let new_char_int = index char - 65 + 4 in
+      let new_char_int = index char + 4 in
       let new_char = inverse_index new_char_int in
       (new_char, int)
   | Up, _, _ ->
@@ -139,38 +157,30 @@ let create_endcoords_shiplength4 (direction : direction)
       let new_int = int + 4 in
       (char, new_int)
 
-let create_endcoords_shiplength5 (direction : direction)
-    ((char, int) : char * int) : char * int =
-  match (direction, char, int) with
-  | Left, _, _ ->
-      let new_char_int = index char - 5 in
-      let new_char = inverse_index new_char_int in
-      (new_char, int)
-  | Right, _, _ ->
-      let new_char_int = index char + 5 in
-      let new_char = inverse_index new_char_int in
-      (new_char, int)
-  | Up, _, _ ->
-      let new_int = int - 5 in
-      (char, new_int)
-  | Down, _, _ ->
-      let new_int = int + 5 in
-      (char, new_int)
-
 let print_ship start_row start_col end_row end_col =
   [
-    for x = start_row - 1 to end_row - 1 do
-      for y = start_col to end_col do
-        let row_arr = List.nth player_grid x in
-        row_arr.(y) <- "#"
-      done
-    done;
+    (if end_col > start_col || end_row > start_row then
+     for x = start_row - 1 to end_row - 1 do
+       for y = start_col to end_col do
+         let row_arr = List.nth player_grid x in
+         row_arr.(y) <- "#"
+       done
+     done);
+    (if end_col < start_col || end_row < start_row then
+     for x = start_row - 1 downto end_row - 1 do
+       for y = start_col downto end_col do
+         let row_arr = List.nth player_grid x in
+         row_arr.(y) <- "#"
+       done
+     done);
   ]
 
 let print_ship1 (direction : direction) ((char, int) : char * int) =
   [
     (let start_col = index char in
      let start_row = int in
+     print_int start_col;
+     print_int start_row;
      let end_col, end_row =
        create_endcoords_shiplength2 direction (char, int)
      in
@@ -179,6 +189,8 @@ let print_ship1 (direction : direction) ((char, int) : char * int) =
      let ship1_start_col = start_col in
      let ship1_end_row = end_row in
      let ship1_end_col = new_end_col in
+     print_int ship1_end_col;
+     print_int ship1_end_row;
      print_ship ship1_start_row ship1_start_col ship1_end_row ship1_end_col);
   ]
 
@@ -242,6 +254,6 @@ let print_ship5 (direction : direction) ((char, int) : char * int) =
      print_ship ship5_start_row ship5_start_col ship5_end_row ship5_end_col);
   ]
 
-let _ = print_ship4 Left ('B', 4)
-
-(* let _ = print_ship 2 2 3 2 *)
+(* let _ = print_ship4 Right ('B', 4) let _ = print_ship1 Left ('E', 7) let _ =
+   print_ship2 Down ('A', 1) let _ = print_ship3 Up ('D', 10) let _ =
+   print_ship5 Left ('H', 3) *)
