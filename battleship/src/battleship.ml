@@ -214,7 +214,7 @@ let print_ship3 (direction : direction) ((char, int) : char * int) =
     (let start_col = Char.code char - 65 in
      let start_row = int in
      let end_col, end_row =
-       create_endcoords_shiplength2 direction (char, int)
+       create_endcoords_shiplength3 direction (char, int)
      in
      let new_end_col = Char.code end_col - 65 in
      let ship3_start_row = start_row in
@@ -253,6 +253,8 @@ let print_ship5 (direction : direction) ((char, int) : char * int) =
      let ship5_end_col = new_end_col in
      print_ship ship5_start_row ship5_start_col ship5_end_row ship5_end_col);
   ]
+
+let return_player_grid () = player_grid
 (* let _ = print_ship4 Right ('B', 4) let _ = print_ship1 Left ('E', 7) let _ =
    print_ship2 Down ('A', 1) let _ = print_ship3 Up ('D', 10) let _ =
    print_ship5 Left ('H', 3) *)
