@@ -253,7 +253,6 @@ let print_ship5 (direction : direction) ((char, int) : char * int) =
      let ship5_end_col = new_end_col in
      print_ship ship5_start_row ship5_start_col ship5_end_row ship5_end_col);
   ]
-
 (* let _ = print_ship4 Right ('B', 4) let _ = print_ship1 Left ('E', 7) let _ =
    print_ship2 Down ('A', 1) let _ = print_ship3 Up ('D', 10) let _ =
    print_ship5 Left ('H', 3) *)
