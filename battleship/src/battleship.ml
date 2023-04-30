@@ -99,8 +99,13 @@ let create_endcoords_shiplength2 (direction : direction)
 >>>>>>> added quitting, got rid of command file
       (new_char, int)
   | Right, _, _ ->
+<<<<<<< HEAD
       let new_char_int = Char.code char + 2 in
       let new_char = inverse_char_code new_char_int in
+=======
+      let new_char_int = index char + 1 in
+      let new_char = inverse_index new_char_int in
+>>>>>>> 363a966 (working on test cases)
       (new_char, int)
   | Up, _, _ ->
 <<<<<<< HEAD
