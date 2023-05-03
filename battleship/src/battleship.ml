@@ -157,30 +157,28 @@ let create_endcoords_shiplength5 (direction : direction)
       let new_int = int + 4 in
       (char, new_int)
 
-let print_ship start_row start_col end_row end_col =
+let print_ship input_grid start_row start_col end_row end_col =
   [
     (if end_col > start_col || end_row > start_row then
      for x = start_row - 1 to end_row - 1 do
        for y = start_col to end_col do
-         let row_arr = List.nth player_grid x in
+         let row_arr = List.nth input_grid x in
          row_arr.(y) <- "#"
        done
      done);
     (if end_col < start_col || end_row < start_row then
      for x = start_row - 1 downto end_row - 1 do
        for y = start_col downto end_col do
-         let row_arr = List.nth player_grid x in
+         let row_arr = List.nth input_grid x in
          row_arr.(y) <- "#"
        done
      done);
   ]
 
-let print_ship1 (direction : direction) ((char, int) : char * int) =
+let print_ship1 input_grid (direction : direction) ((char, int) : char * int) =
   [
     (let start_col = Char.code char - 65 in
      let start_row = int in
-     print_int start_col;
-     print_int start_row;
      let end_col, end_row =
        create_endcoords_shiplength2 direction (char, int)
      in
@@ -189,12 +187,11 @@ let print_ship1 (direction : direction) ((char, int) : char * int) =
      let ship1_start_col = start_col in
      let ship1_end_row = end_row in
      let ship1_end_col = new_end_col in
-     print_int ship1_end_col;
-     print_int ship1_end_row;
-     print_ship ship1_start_row ship1_start_col ship1_end_row ship1_end_col);
+     print_ship input_grid ship1_start_row ship1_start_col ship1_end_row
+       ship1_end_col);
   ]
 
-let print_ship2 (direction : direction) ((char, int) : char * int) =
+let print_ship2 input_grid (direction : direction) ((char, int) : char * int) =
   [
     (let start_col = Char.code char - 65 in
      let start_row = int in
@@ -206,10 +203,11 @@ let print_ship2 (direction : direction) ((char, int) : char * int) =
      let ship2_start_col = start_col in
      let ship2_end_row = end_row in
      let ship2_end_col = new_end_col in
-     print_ship ship2_start_row ship2_start_col ship2_end_row ship2_end_col);
+     print_ship input_grid ship2_start_row ship2_start_col ship2_end_row
+       ship2_end_col);
   ]
 
-let print_ship3 (direction : direction) ((char, int) : char * int) =
+let print_ship3 input_grid (direction : direction) ((char, int) : char * int) =
   [
     (let start_col = Char.code char - 65 in
      let start_row = int in
@@ -221,10 +219,11 @@ let print_ship3 (direction : direction) ((char, int) : char * int) =
      let ship3_start_col = start_col in
      let ship3_end_row = end_row in
      let ship3_end_col = new_end_col in
-     print_ship ship3_start_row ship3_start_col ship3_end_row ship3_end_col);
+     print_ship input_grid ship3_start_row ship3_start_col ship3_end_row
+       ship3_end_col);
   ]
 
-let print_ship4 (direction : direction) ((char, int) : char * int) =
+let print_ship4 input_grid (direction : direction) ((char, int) : char * int) =
   [
     (let start_col = Char.code char - 65 in
      let start_row = int in
@@ -236,10 +235,11 @@ let print_ship4 (direction : direction) ((char, int) : char * int) =
      let ship4_start_col = start_col in
      let ship4_end_row = end_row in
      let ship4_end_col = new_end_col in
-     print_ship ship4_start_row ship4_start_col ship4_end_row ship4_end_col);
+     print_ship input_grid ship4_start_row ship4_start_col ship4_end_row
+       ship4_end_col);
   ]
 
-let print_ship5 (direction : direction) ((char, int) : char * int) =
+let print_ship5 input_grid (direction : direction) ((char, int) : char * int) =
   [
     (let start_col = Char.code char - 65 in
      let start_row = int in
@@ -251,10 +251,12 @@ let print_ship5 (direction : direction) ((char, int) : char * int) =
      let ship5_start_col = start_col in
      let ship5_end_row = end_row in
      let ship5_end_col = new_end_col in
-     print_ship ship5_start_row ship5_start_col ship5_end_row ship5_end_col);
+     print_ship input_grid ship5_start_row ship5_start_col ship5_end_row
+       ship5_end_col);
   ]
 
-let return_player_grid () = player_grid
-(* let _ = print_ship4 Right ('B', 4) let _ = print_ship1 Left ('E', 7) let _ =
-   print_ship2 Down ('A', 1) let _ = print_ship3 Up ('D', 10) let _ =
-   print_ship5 Left ('H', 3) *)
+let _ = print_ship4 player_grid Right ('B', 4)
+let _ = print_ship1 player_grid Left ('E', 7)
+let _ = print_ship2 player_grid Down ('A', 1)
+let _ = print_ship3 player_grid Up ('D', 10)
+let _ = print_ship5 player_grid Left ('H', 3)

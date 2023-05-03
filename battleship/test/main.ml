@@ -160,14 +160,61 @@ let ship1_down_grid =
     [| " "; " "; " "; " "; " "; " "; " "; " "; " "; " " |];
   ]
 
-(* let place_ship_test=(name : string) grid (f : (direction -> char * int ->
-   unit list list) -> string array list) (direction : direction) (initial_spot :
-   char * int) expected_output : test = name >:: fun _ -> let new_grid=(f
-   direction initial_spot) in return_player_grid() in let
-   grid=return_player_grid in assert_equal expected_output grid *)
+(* let units_to_atring_arr lst = List.map (fun unit_lst -> Array.of_list
+   (List.map (fun unit_val -> "()") unit_lst)) lst *)
+
+(* let place_ship_test (name : string) (f : string array list -> direction ->
+   char * int -> unit list list) (initial_grid : string array list) (direction :
+   direction) (initial_spot : char * int) (expected_output : string array list)
+   : test = name >:: fun _ -> let final_grid = f initial_grid direction
+   initial_spot in let final_grid2 = units_to_atring_arr final_grid in
+   assert_equal expected_output final_grid2 *)
+
+let str_arr_lst unit_lst_lst =
+  List.map
+    (fun unit_lst -> Array.of_list (List.map (fun unit -> " ") unit_lst))
+    unit_lst_lst
+
+let place_ship_test (name : string)
+    (f : string array list -> direction -> char * int -> unit list list)
+    (initial_grid : string array list) (direction : direction)
+    (initial_spot : char * int) (expected_output : string array list) : test =
+  name >:: fun _ ->
+  let final_grid = f initial_grid direction initial_spot in
+  assert_equal expected_output (str_arr_lst final_grid)
+
+(* let print_unit_list lst = List.iter (fun unit_lst -> List.iter (fun unit_val
+   -> print_string " ") unit_lst; print_newline ()) lst
+
+   let final_grid_1 = List.map (fun arr -> List.map (fun _ -> ()) (Array.to_list
+   arr)) ship1_left_grid
+
+   let _ = print_unit_list final_grid_1 *)
+
+let print_str_list lst =
+  List.iter
+    (fun str_arr ->
+      Array.iter
+        (fun str ->
+          print_string str;
+          print_string " ")
+        str_arr;
+      print_newline ())
+    lst
+
+(*let _ = print_str_list ship1_left_grid *)
+
+let place_ship_tests =
+  [
+    place_ship_test "place ship1 left" print_ship1 grid Left ('E', 7)
+      ship1_left_grid
+    (* place_ship_test "place ship1 right" print_ship1 grid Right ('E', 7)
+       (List.map (fun arr -> List.map (fun _ -> ()) (Array.to_list arr))
+       ship1_right_grid); *);
+  ]
 
 let tests =
   "test suite for Final Project"
-  >::: List.flatten [ new_turn_tests; create_endcoords_tests ]
+  >::: List.flatten [ new_turn_tests; create_endcoords_tests; place_ship_tests ]
 
 let _ = run_test_tt_main tests
