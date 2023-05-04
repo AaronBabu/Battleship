@@ -27,6 +27,9 @@ zip:
 	rm -f adventure.zip
 	zip -r adventure.zip . -x@exclude.lst
 
+linecount: 
+	cloc --by-file --include-lang=OCaml .
+
 clean:
 	dune clean
 	rm -f adventure.zip
@@ -36,5 +39,7 @@ doc:
 
 opendoc: doc
 	@bash opendoc.sh
+
+
 
 

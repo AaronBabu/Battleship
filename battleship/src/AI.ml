@@ -29,10 +29,10 @@ let randomgrid =
 
 let () = Random.self_init ()
 let ywing = { ship = Ship1; length = 2 }
-let xwing = { ship = Ship2; length = 2 }
+let xwing = { ship = Ship2; length = 3 }
 let mfalcon = { ship = Ship3; length = 3 }
-let delta7 = { ship = Ship4; length = 3 }
-let stardestroyer = { ship = Ship5; length = 4 }
+let delta7 = { ship = Ship4; length = 4 }
+let stardestroyer = { ship = Ship5; length = 5 }
 let shipList = [ ywing; xwing; mfalcon; delta7; stardestroyer ]
 
 let letter_randomizer () =
@@ -43,6 +43,13 @@ let number_randomizer () =
   let random_int = Random.int 10 in
   random_int + 1
 
+let is_occupied grid (col, row) =
+  let char_code = Char.code col in
+  if row >= 1 && row <= 10 && char_code >= 65 && char_code <= 74 then
+    let row_arr = List.nth grid (row - 1) in
+    row_arr.(char_code - 65) = "#"
+  else
+    false
 let coord () = (letter_randomizer (), number_randomizer ())
 
 let rec generate_ship_coords len coord dir acc =
@@ -60,21 +67,23 @@ let rec generate_ship_coords len coord dir acc =
       else acc
   | _, _, _ -> acc
 
-let rec place_ship (ship : ships) =
+let rec place_ship grid (ship : ships) =
   let length = ship.length in
   let col, row = coord () in
   let direction = if Random.bool () then 'h' else 'v' in
   let coords =
     (col, row) :: generate_ship_coords (length - 1) (col, row) direction []
   in
-  if List.length coords = length then coords else place_ship ship
+  if List.length coords = length && List.for_all (fun c -> not (is_occupied grid c)) coords then
+    coords
+  else
+    place_ship grid ship
 
-let ywingCoords = place_ship ywing
-let xwingCoords = place_ship xwing
-let mfalconCoords = place_ship mfalcon
-let delta7Coords = place_ship delta7
-let stardestroyerCoords = place_ship stardestroyer
-
+let ywingCoords = place_ship randomgrid ywing
+let xwingCoords = place_ship randomgrid xwing
+let mfalconCoords = place_ship randomgrid mfalcon
+let delta7Coords = place_ship randomgrid delta7
+let stardestroyerCoords = place_ship randomgrid stardestroyer
 let place_ship_on_grid grid ship_coords =
   let update_grid row col =
     let row_arr = List.nth grid row in

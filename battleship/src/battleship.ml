@@ -255,8 +255,8 @@ let print_ship5 input_grid (direction : direction) ((char, int) : char * int) =
        ship5_end_col);
   ]
 
-let _ = print_ship4 player_grid Right ('B', 4)
+(* let _ = print_ship4 player_grid Right ('B', 4)
 let _ = print_ship1 player_grid Left ('E', 7)
 let _ = print_ship2 player_grid Down ('A', 1)
 let _ = print_ship3 player_grid Up ('D', 10)
-let _ = print_ship5 player_grid Left ('H', 3)
+let _ = print_ship5 player_grid Left ('H', 3) *)

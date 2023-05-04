@@ -22,7 +22,7 @@ let parse string : string * string =
   | "shoot" :: tl1 :: tl2 -> (tl1, List.hd tl2)
   | _ -> raise Malformed
 
-let parse2 string : direction * string * string =
+let parse2 string : direction * char * int =
   let start_lst = String.split_on_char ' ' string in
   let end_list = List.filter (fun x -> String.length x != 0) start_lst in
   let m_list = List.map (fun x -> String.lowercase_ascii x) end_list in
@@ -30,14 +30,14 @@ let parse2 string : direction * string * string =
   | [] -> raise Empty
   | "place" :: dir :: col :: row -> (
       match dir with
-      | "left" -> (Left, col, List.hd row)
-      | "Left" -> (Left, col, List.hd row)
-      | "right" -> (Right, col, List.hd row)
-      | "Right" -> (Right, col, List.hd row)
-      | "up" -> (Up, col, List.hd row)
-      | "Up" -> (Up, col, List.hd row)
-      | "down" -> (Down, col, List.hd row)
-      | "Down" -> (Down, col, List.hd row)
+      | "left" -> (Left, String.get (String.uppercase_ascii col) 0, int_of_string (List.hd row))
+      | "Left" -> (Left, String.get (String.uppercase_ascii col) 0, int_of_string (List.hd row))
+      | "right" -> (Right, String.get (String.uppercase_ascii col) 0, int_of_string (List.hd row))
+      | "Right" -> (Right, String.get (String.uppercase_ascii col) 0, int_of_string (List.hd row))
+      | "up" -> (Up, String.get (String.uppercase_ascii col) 0, int_of_string (List.hd row))
+      | "Up" -> (Up, String.get (String.uppercase_ascii col) 0, int_of_string (List.hd row))
+      | "down" -> (Down, String.get (String.uppercase_ascii col) 0, int_of_string (List.hd row))
+      | "Down" -> (Down, String.get (String.uppercase_ascii col) 0, int_of_string (List.hd row))
       | _ -> raise Malformed)
   | _ -> raise Malformed
 
@@ -46,8 +46,8 @@ let reset_board () =
   new_grid
 
 let player_board () =
-  let new_grid = List.map (fun row -> Array.copy row) player_grid in
-  new_grid
+  let new_player_grid = List.map (fun row -> Array.copy row) player_grid in
+  new_player_grid
 
 let rec play_game grid grid2 string =
   try
@@ -110,11 +110,85 @@ let instructions () =
 
   print_endline "\n Happy playing! \n"
 
+let first (a, b, c) = a
+let second (a, b, c) = b
+let third (a, b, c) = c
+
+let rec place_ship1 grid string = 
+  try 
+    let place = parse2 string in 
+    let _ = print_char (second place) in 
+    let _ = print_int (third place) in 
+    let _ = print_ship1 grid (first place) ((second place), (third place)) in ()
+  with exn ->  
+    print_endline ("Error: " ^ (Printexc.to_string exn));
+    let line = read_line () in
+    place_ship1 grid line
+
+let rec place_ship2 grid string = 
+  try 
+    let place = parse2 string in
+    let _ = print_ship2 grid (first place) ((second place), (third place)) in ()
+  with _ ->  
+    let line = read_line () in
+    place_ship2 grid line
+
+let rec place_ship3 grid string = 
+  try 
+    let place = parse2 string in
+    let _ = print_ship3 grid (first place) ((second place), (third place)) in ()
+  with _ ->  
+    let line = read_line () in
+    place_ship3 grid line
+
+let rec place_ship4 grid string = 
+  try 
+    let place = parse2 string in
+    let _ = print_ship4 grid (first place) ((second place), (third place)) in ()
+  with _ ->  
+    let line = read_line () in
+    place_ship4 grid line
+
+let rec place_ship5 grid string = 
+  try 
+    let place = parse2 string in
+    let _ = print_ship5 grid (first place) ((second place), (third place)) in ()
+  with _ ->  
+    let line = read_line () in
+    place_ship5 grid line
+
 let main () =
   let instruct = instructions () in
   instruct;
   let grid1 = reset_board () in
   let grid2 = player_board () in
+  print_column_label grid2;
+  print_grid grid2 1;
+  print_endline "\n Place ship 1 - Size 2 \n";
+  let line = read_line () in
+  place_ship1 grid2 line;
+  print_column_label grid2;
+  print_grid grid2 1;
+  print_endline "\n Place ship 2 - Size 3 \n";
+  let line = read_line () in
+  place_ship2 grid2 line;
+  print_column_label grid2;
+  print_grid grid2 1;
+  print_endline "\n Place ship 3 - Size 3 \n";
+  let line = read_line () in
+  place_ship3 grid2 line;
+  print_column_label grid2;
+  print_grid grid2 1;
+  print_endline "\n Place ship 4 - Size 4 \n";
+  let line = read_line () in
+  place_ship4 grid2 line;
+  print_column_label grid2;
+  print_grid grid2 1;
+  print_endline "\n Place ship 5 - Size 5 \n";
+  let line = read_line () in
+  place_ship5 grid2 line;
+  print_column_label grid2;
+  print_grid grid2 1;
   print_endline "\n AI board \n";
   print_endline "Choose a target:";
   let line = read_line () in
