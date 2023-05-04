@@ -12,6 +12,21 @@ exception Empty
 exception Malformed
 exception Quit
 
+let player_board_for_transfer =
+  [
+    [| " "; " "; " "; " "; " "; " "; " "; " "; " "; " " |];
+    [| " "; " "; " "; " "; " "; " "; " "; " "; " "; " " |];
+    [| " "; " "; " "; " "; " "; " "; " "; " "; " "; " " |];
+    [| " "; " "; " "; " "; " "; " "; " "; " "; " "; " " |];
+    [| " "; " "; " "; " "; " "; " "; " "; " "; " "; " " |];
+    [| " "; " "; " "; " "; " "; " "; " "; " "; " "; " " |];
+    [| " "; " "; " "; " "; " "; " "; " "; " "; " "; " " |];
+    [| " "; " "; " "; " "; " "; " "; " "; " "; " "; " " |];
+    [| " "; " "; " "; " "; " "; " "; " "; " "; " "; " " |];
+    [| " "; " "; " "; " "; " "; " "; " "; " "; " "; " " |];
+  ]
+
+
 let parse string : string * string =
   let start_lst = String.split_on_char ' ' string in
   let end_list = List.filter (fun x -> String.length x != 0) start_lst in
@@ -42,17 +57,16 @@ let parse2 string : direction * char * int =
   | _ -> raise Malformed
 
 let reset_board () =
-  let new_grid = List.map (fun row -> Array.copy row) randomgrid in
-  new_grid
+  List.map (fun row -> Array.copy row) randomgrid
 
 let player_board () =
-  let new_player_grid = List.map (fun row -> Array.copy row) player_grid in
-  new_player_grid
+  List.map (fun row -> Array.copy row) player_grid
 
 let rec play_game grid grid2 string =
   try
     let move2 = parse string in
     new_turn grid move2;
+    let _ = pick_random_point grid2 in 
     print_endline "\n AI board \n";
     print_column_label grid;
     print_grid grid 1;
@@ -117,8 +131,6 @@ let third (a, b, c) = c
 let rec place_ship1 grid string = 
   try 
     let place = parse2 string in 
-    let _ = print_char (second place) in 
-    let _ = print_int (third place) in 
     let _ = print_ship1 grid (first place) ((second place), (third place)) in ()
   with exn ->  
     print_endline ("Error: " ^ (Printexc.to_string exn));
