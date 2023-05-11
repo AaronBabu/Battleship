@@ -96,7 +96,7 @@ let rec play_game grid grid2 string =
     let _ = pick_random_point grid2 in
     print_endline "\n AI board \n";
     print_column_label grid;
-    print_grid grid 1;
+    print_grid_ai grid 1;
     print_endline "\n Player board \n";
     print_column_label grid2;
     print_grid grid2 1;

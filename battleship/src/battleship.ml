@@ -20,6 +20,10 @@ let rec print_row row : unit =
   Array.iter (fun x -> print_string ("| " ^ x ^ " ")) row;
   print_string "|"
 
+let rec print_row_ai row : unit =
+  Array.iter (fun x -> if x <> "#" then print_string ("| " ^ x ^ " ") else print_string ("| " ^ " " ^ " ")) row;
+  print_string "|"
+
 let print_column_label array =
   let num_cols = num_columns array in
   print_string "    ";
@@ -46,6 +50,20 @@ let rec print_grid array (row_idx : int) =
       print_rowlines columns;
       print_endline "";
       print_grid t (row_idx + 1)
+
+let rec print_grid_ai array (row_idx : int) =
+  let single = if row_idx < 10 then true else false in
+  let columns = num_columns array in
+  match array with
+  | [] -> print_string ""
+  | h :: t ->
+      print_int row_idx;
+      if single then print_string " " else print_string "";
+      print_row_ai h;
+      print_endline "";
+      print_rowlines columns;
+      print_endline "";
+      print_grid_ai t (row_idx + 1)
 
 let player_grid =
   [
