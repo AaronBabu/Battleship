@@ -26,7 +26,6 @@ let player_board_for_transfer =
     [| " "; " "; " "; " "; " "; " "; " "; " "; " "; " " |];
   ]
 
-
 let parse string : string * string =
   let start_lst = String.split_on_char ' ' string in
   let end_list = List.filter (fun x -> String.length x != 0) start_lst in
@@ -45,28 +44,49 @@ let parse2 string : direction * char * int =
   | [] -> raise Empty
   | "place" :: dir :: col :: row -> (
       match dir with
-      | "left" -> (Left, String.get (String.uppercase_ascii col) 0, int_of_string (List.hd row))
-      | "Left" -> (Left, String.get (String.uppercase_ascii col) 0, int_of_string (List.hd row))
-      | "right" -> (Right, String.get (String.uppercase_ascii col) 0, int_of_string (List.hd row))
-      | "Right" -> (Right, String.get (String.uppercase_ascii col) 0, int_of_string (List.hd row))
-      | "up" -> (Up, String.get (String.uppercase_ascii col) 0, int_of_string (List.hd row))
-      | "Up" -> (Up, String.get (String.uppercase_ascii col) 0, int_of_string (List.hd row))
-      | "down" -> (Down, String.get (String.uppercase_ascii col) 0, int_of_string (List.hd row))
-      | "Down" -> (Down, String.get (String.uppercase_ascii col) 0, int_of_string (List.hd row))
+      | "left" ->
+          ( Left,
+            String.get (String.uppercase_ascii col) 0,
+            int_of_string (List.hd row) )
+      | "Left" ->
+          ( Left,
+            String.get (String.uppercase_ascii col) 0,
+            int_of_string (List.hd row) )
+      | "right" ->
+          ( Right,
+            String.get (String.uppercase_ascii col) 0,
+            int_of_string (List.hd row) )
+      | "Right" ->
+          ( Right,
+            String.get (String.uppercase_ascii col) 0,
+            int_of_string (List.hd row) )
+      | "up" ->
+          ( Up,
+            String.get (String.uppercase_ascii col) 0,
+            int_of_string (List.hd row) )
+      | "Up" ->
+          ( Up,
+            String.get (String.uppercase_ascii col) 0,
+            int_of_string (List.hd row) )
+      | "down" ->
+          ( Down,
+            String.get (String.uppercase_ascii col) 0,
+            int_of_string (List.hd row) )
+      | "Down" ->
+          ( Down,
+            String.get (String.uppercase_ascii col) 0,
+            int_of_string (List.hd row) )
       | _ -> raise Malformed)
   | _ -> raise Malformed
 
-let reset_board () =
-  List.map (fun row -> Array.copy row) randomgrid
-
-let player_board () =
-  List.map (fun row -> Array.copy row) player_grid
+let reset_board () = List.map (fun row -> Array.copy row) randomgrid
+let player_board () = List.map (fun row -> Array.copy row) player_grid
 
 let rec play_game grid grid2 string =
   try
     let move2 = parse string in
     new_turn grid move2;
-    let _ = pick_random_point grid2 in 
+    let _ = pick_random_point grid2 in
     print_endline "\n AI board \n";
     print_column_label grid;
     print_grid grid 1;
@@ -128,44 +148,49 @@ let first (a, b, c) = a
 let second (a, b, c) = b
 let third (a, b, c) = c
 
-let rec place_ship1 grid string = 
-  try 
-    let place = parse2 string in 
-    let _ = print_ship1 grid (first place) ((second place), (third place)) in ()
-  with exn ->  
-    print_endline ("Error: " ^ (Printexc.to_string exn));
+let rec place_ship1 grid string =
+  try
+    let place = parse2 string in
+    let _ = print_ship1 grid (first place) (second place, third place) in
+    ()
+  with exn ->
+    print_endline ("Error: " ^ Printexc.to_string exn);
     let line = read_line () in
     place_ship1 grid line
 
-let rec place_ship2 grid string = 
-  try 
+let rec place_ship2 grid string =
+  try
     let place = parse2 string in
-    let _ = print_ship2 grid (first place) ((second place), (third place)) in ()
-  with _ ->  
+    let _ = print_ship2 grid (first place) (second place, third place) in
+    ()
+  with _ ->
     let line = read_line () in
     place_ship2 grid line
 
-let rec place_ship3 grid string = 
-  try 
+let rec place_ship3 grid string =
+  try
     let place = parse2 string in
-    let _ = print_ship3 grid (first place) ((second place), (third place)) in ()
-  with _ ->  
+    let _ = print_ship3 grid (first place) (second place, third place) in
+    ()
+  with _ ->
     let line = read_line () in
     place_ship3 grid line
 
-let rec place_ship4 grid string = 
-  try 
+let rec place_ship4 grid string =
+  try
     let place = parse2 string in
-    let _ = print_ship4 grid (first place) ((second place), (third place)) in ()
-  with _ ->  
+    let _ = print_ship4 grid (first place) (second place, third place) in
+    ()
+  with _ ->
     let line = read_line () in
     place_ship4 grid line
 
-let rec place_ship5 grid string = 
-  try 
+let rec place_ship5 grid string =
+  try
     let place = parse2 string in
-    let _ = print_ship5 grid (first place) ((second place), (third place)) in ()
-  with _ ->  
+    let _ = print_ship5 grid (first place) (second place, third place) in
+    ()
+  with _ ->
     let line = read_line () in
     place_ship5 grid line
 
@@ -204,6 +229,10 @@ let main () =
   print_endline "\n AI board \n";
   print_endline "Choose a target:";
   let line = read_line () in
-  play_game grid1 grid2 line
+  play_game grid1 grid2 line;
+  if check_hit_count grid1 then print_endline "\n Game Ended: You Won \n"
+  else ();
+  if check_hit_count grid2 then print_endline "\n Game Ended: You lost \n"
+  else ()
 
 let () = main ()
