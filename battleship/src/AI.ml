@@ -67,23 +67,26 @@ let rec generate_ship_coords len coord dir acc =
       else acc
   | _, _, _ -> acc
 
-let rec place_ship grid (ship : ships) =
+let rec place_ship grid (ship : ships) ship_coords =
   let length = ship.length in
   let col, row = coord () in
   let direction = if Random.bool () then 'h' else 'v' in
   let coords =
     (col, row) :: generate_ship_coords (length - 1) (col, row) direction []
   in
-  if List.length coords = length && List.for_all (fun c -> not (is_occupied grid c)) coords then
+  if List.length coords = length
+      && List.for_all (fun c -> not (is_occupied grid c)) coords
+      && not (List.exists (fun coord -> List.mem coord ship_coords) coords)
+  then
     coords
   else
-    place_ship grid ship
+    place_ship grid ship ship_coords
 
-let ywingCoords = place_ship randomgrid ywing
-let xwingCoords = place_ship randomgrid xwing
-let mfalconCoords = place_ship randomgrid mfalcon
-let delta7Coords = place_ship randomgrid delta7
-let stardestroyerCoords = place_ship randomgrid stardestroyer
+let ywingCoords = place_ship randomgrid ywing []
+let xwingCoords = place_ship randomgrid xwing ywingCoords
+let mfalconCoords = place_ship randomgrid mfalcon (ywingCoords @ xwingCoords)
+let delta7Coords = place_ship randomgrid delta7 (ywingCoords @ xwingCoords @ mfalconCoords)
+let stardestroyerCoords = place_ship randomgrid stardestroyer (ywingCoords @ xwingCoords @ mfalconCoords @ delta7Coords)
 let place_ship_on_grid grid ship_coords =
   let update_grid row col =
     let row_arr = List.nth grid row in

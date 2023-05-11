@@ -11,6 +11,8 @@ type command = Shoot of object_phrase
 exception Empty
 exception Malformed
 exception Quit
+exception Win 
+exception Lose
 
 let player_board_for_transfer =
   [
@@ -34,6 +36,7 @@ let parse string : string * string =
   | [] -> raise Empty
   | [ "quit" ] -> raise Quit
   | "shoot" :: tl1 :: tl2 -> (tl1, List.hd tl2)
+  | [ "win" ] -> ("Win", "Checker")
   | _ -> raise Malformed
 
 let parse2 string : direction * char * int =
@@ -84,9 +87,9 @@ let player_board () = List.map (fun row -> Array.copy row) player_grid
 
 let rec play_game grid grid2 string =
   try
-    if check_hit_count grid then raise Quit
+    if check_hit_count grid then raise Win
     else ();
-    if check_hit_count grid2 then raise Quit
+    if check_hit_count grid2 then raise Lose
     else ();
     let move2 = parse string in
     new_turn grid move2;
@@ -103,6 +106,8 @@ let rec play_game grid grid2 string =
     
   with
   | Quit -> print_endline "Quitting"
+  | Win -> print_endline "You Won!"
+  | Lose -> print_endline "You Lose!"
   | _ ->
       print_endline "\n Choose a target: \n";
       let line = read_line () in
