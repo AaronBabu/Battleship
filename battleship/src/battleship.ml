@@ -261,14 +261,15 @@ let print_ship5 input_grid (direction : direction) ((char, int) : char * int) =
    ('H', 3) *)
 
 let check_hit_count (grid : string array list) =
-  let rec count_hit grid acc =
-    match grid with
-    | [] -> acc
-    | hd :: tl ->
-        count_hit tl
-          (acc
-          + String.length (String.concat "" (List.filter (fun x -> x = "X") hd))
-          )
-  in
-  let new_grid = List.map Array.to_list grid in
-  count_hit new_grid 0 = 17
+let rec count_hit grid acc =
+  match grid with
+  | [] -> acc
+  | hd :: tl ->
+      count_hit tl
+        (acc
+        + List.length (List.filter (fun x -> x = "x") hd)
+        )
+in
+let new_grid = List.map Array.to_list grid in
+count_hit new_grid 0 = 17
+

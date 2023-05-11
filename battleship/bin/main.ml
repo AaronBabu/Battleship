@@ -84,6 +84,10 @@ let player_board () = List.map (fun row -> Array.copy row) player_grid
 
 let rec play_game grid grid2 string =
   try
+    if check_hit_count grid then raise Quit
+    else ();
+    if check_hit_count grid2 then raise Quit
+    else ();
     let move2 = parse string in
     new_turn grid move2;
     let _ = pick_random_point grid2 in
@@ -96,6 +100,7 @@ let rec play_game grid grid2 string =
     print_endline "\n Choose a target: \n";
     let line = read_line () in
     play_game grid grid2 line
+    
   with
   | Quit -> print_endline "Quitting"
   | _ ->
@@ -229,10 +234,6 @@ let main () =
   print_endline "\n AI board \n";
   print_endline "Choose a target:";
   let line = read_line () in
-  play_game grid1 grid2 line;
-  if check_hit_count grid1 then print_endline "\n Game Ended: You Won \n"
-  else ();
-  if check_hit_count grid2 then print_endline "\n Game Ended: You lost \n"
-  else ()
+  play_game grid1 grid2 line
 
 let () = main ()
