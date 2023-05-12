@@ -47,49 +47,6 @@ open Parse
    on how we wanted and how we implemented it, we can ensure that our system is
    correct. *)
 
-(* Our test file successfully tests several features of our game. Below is a
-   detailed description of each test function and why/how we tested it this way:
-
-   new_turn_test(): This tested the making a move on the board and compared the
-   expected grid to the grid with the new move placed. This was done with glass
-   box testing after implementing the new_turn() function. Although we only did
-   a basic OUnit test here, we also manually tested placing moves on the grid
-   when running `` make play ``.
-
-   new_turn_exn_test(): This extended the new_turn_test by testing when the
-   new_turn function threw an exception. It throws an exception if there was
-   already a move in that position. Again, this was also tested manually.
-
-   create_endcoords_test(): This tested creating the end coordinates needed for
-   placing the ships based on the given initial coordinates. This was done with
-   black box testing, as we tested each direction possible to place the ship
-   with each possible ship length. This was fully tested with OUnit testing and
-   not manually, but we ensured that it worked once we could play the game.
-
-   place_ship_test(): This tested placing the ships on the grid given the
-   specific ship placing function (based on ship size) and the intial directions
-   and coordinates. These tests required making initial and final grids to
-   compare because we needed to ensure that each ship of each length could be
-   placed in each direction. Since the function only mutates the given grid and
-   doesn't create a new grid, we had to make 2 grids per ship and direction to
-   compare. This testing was done completely with OUnit testing and we tested
-   each possibility with glass box testing after the functions were written.
-
-   check_hit_count_test(): This tested the function that checks if the game has
-   ended or not, with one of the players hitting all ships or not hitting all
-   ships. This was done with black box testing, as it will only return true if
-   there are 17 x's on the board, and will return false with any other amount of
-   x's.
-
-   Overall, our testing approach demonstreates full correctness of the system.
-   With OUnit, we were able to test making moves, calculating coordinates, and
-   placing ships in every direction with ships of every length, which are the
-   main aspects to playing the game. We were also able to fully test all aspects
-   manually once we had everything implemented together by being able to
-   physically play the game. Since we are able to play our game correctly based
-   on how we wanted and how we implemented it, we can ensure that our system is
-   correct. *)
-
 let grid =
   [
     [| " "; " "; " "; " "; " "; " "; " "; " "; " "; " " |];
