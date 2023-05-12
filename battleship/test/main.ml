@@ -2,6 +2,7 @@ open OUnit2
 open Lib
 open State
 open Battleship
+open Parse
 
 let grid =
   [
@@ -560,6 +561,9 @@ let place_ship_test (name : string)
   let final_grid = f initial_grid direction initial_spot in
   assert_equal expected_output initial_grid
 
+(* let parse_test (name : string) (input : string) (output : string * string) :
+   test = name >:: fun _ -> assert_equal output (parse input) *)
+
 let place_ship_tests =
   [
     place_ship_test "place ship1 left" print_ship1 grid_1_left_initial Left
@@ -596,8 +600,45 @@ let place_ship_tests =
       ('E', 6) ship5_down_grid;
   ]
 
+let print_tuple (x, y, z) = print_endline (Printf.sprintf "(%d, %d, %d)" x y z)
+
+let parse_tests =
+  [
+    ("basic parse" >:: fun _ -> assert_equal ("b", "4") (parse "shoot b 4"));
+    ( "parse with spaces" >:: fun _ ->
+      assert_equal ("a", "3") (parse "shoot a 3 ") );
+    ( "parse with uppercase" >:: fun _ ->
+      assert_equal ("c", "2") (parse "shoot   C 2") );
+    ("empty parse" >:: fun _ -> assert_raises Empty (fun () -> parse ""));
+    ("quit parse" >:: fun _ -> assert_raises Quit (fun () -> parse "quit"));
+    ( "parse anything else " >:: fun _ ->
+      assert_raises Malformed (fun () -> parse "hello") );
+    ("parse2 empty" >:: fun _ -> assert_raises Empty (fun () -> parse2 " "));
+    ( "parse2 spaces" >:: fun _ ->
+      assert_equal (Left, 'A', 4) (parse2 "place left     a   4") );
+    ( "parse2 uppercase left" >:: fun _ ->
+      assert_equal (Left, 'B', 3) (parse2 "place Left b 3") );
+    ( "parse2 right with uppercase coordinates" >:: fun _ ->
+      assert_equal (Right, 'C', 5) (parse2 "place right C 5") );
+    ( "parse2 uppercase right" >:: fun _ ->
+      assert_equal (Right, 'C', 7) (parse2 "place Right c 7") );
+    ( "parse2 uppercase up" >:: fun _ ->
+      assert_equal (Up, 'D', 7) (parse2 " place Up d 7") );
+    ( "parse2 lowercase up" >:: fun _ ->
+      assert_equal (Up, 'G', 10) (parse2 "place up g 10") );
+    ( "parse2 uppercase down" >:: fun _ ->
+      assert_equal (Down, 'F', 8) (parse2 "place Down  f  8") );
+    ( "parse2 lowercase down" >:: fun _ ->
+      assert_equal (Down, 'A', 4) (parse2 "place down A 4") );
+    ( "parse2 anything else" >:: fun _ ->
+      assert_raises Malformed (fun () -> parse2 "flop") );
+  ]
+
 let tests =
   "test suite for Final Project"
-  >::: List.flatten [ new_turn_tests; create_endcoords_tests; place_ship_tests ]
+  >::: List.flatten
+         [
+           new_turn_tests; create_endcoords_tests; place_ship_tests; parse_tests;
+         ]
 
 let _ = run_test_tt_main tests
