@@ -11,7 +11,7 @@ type command = Shoot of object_phrase
 exception Empty
 exception Malformed
 exception Quit
-exception Win 
+exception Win
 exception Lose
 
 let player_board_for_transfer =
@@ -87,10 +87,8 @@ let player_board () = List.map (fun row -> Array.copy row) player_grid
 
 let rec play_game grid grid2 string =
   try
-    if check_hit_count grid then raise Win
-    else ();
-    if check_hit_count grid2 then raise Lose
-    else ();
+    if check_hit_count grid then raise Win else ();
+    if check_hit_count grid2 then raise Lose else ();
     let move2 = parse string in
     new_turn grid move2;
     let _ = pick_random_point grid2 in
@@ -103,7 +101,6 @@ let rec play_game grid grid2 string =
     print_endline "\n Choose a target: \n";
     let line = read_line () in
     play_game grid grid2 line
-    
   with
   | Quit -> print_endline "Quitting"
   | Win -> print_endline "You Won!"
