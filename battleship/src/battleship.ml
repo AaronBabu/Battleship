@@ -21,7 +21,11 @@ let rec print_row row : unit =
   print_string "|"
 
 let rec print_row_ai row : unit =
-  Array.iter (fun x -> if x <> "#" then print_string ("| " ^ x ^ " ") else print_string ("| " ^ " " ^ " ")) row;
+  Array.iter
+    (fun x ->
+      if x <> "#" then print_string ("| " ^ x ^ " ")
+      else print_string ("| " ^ " " ^ " "))
+    row;
   print_string "|"
 
 let print_column_label array =
@@ -273,21 +277,12 @@ let print_ship5 input_grid (direction : direction) ((char, int) : char * int) =
        ship5_end_col);
   ]
 
-(* let _ = print_ship4 player_grid Right ('B', 4) let _ = print_ship1
-   player_grid Left ('E', 7) let _ = print_ship2 player_grid Down ('A', 1) let _
-   = print_ship3 player_grid Up ('D', 10) let _ = print_ship5 player_grid Left
-   ('H', 3) *)
-
 let check_hit_count (grid : string array list) =
-let rec count_hit grid acc =
-  match grid with
-  | [] -> acc
-  | hd :: tl ->
-      count_hit tl
-        (acc
-        + List.length (List.filter (fun x -> x = "x") hd)
-        )
-in
-let new_grid = List.map Array.to_list grid in
-count_hit new_grid 0 = 17
-
+  let rec count_hit grid acc =
+    match grid with
+    | [] -> acc
+    | hd :: tl ->
+        count_hit tl (acc + List.length (List.filter (fun x -> x = "x") hd))
+  in
+  let new_grid = List.map Array.to_list grid in
+  count_hit new_grid 0 = 17

@@ -14,6 +14,7 @@ message in terminal, you can run the command above to install them.
 ## Make and Run
 - cd into the battleship folder 
 - ``make build`` which runs dune build
-- `` make play`` and then choose a target by typing and entering "shoot capital-letter(A-J) number(1-10)" (example "shoot B 4" to hit coordinate B4) to shoot into desired position
+- `` make utop `` which launches the top level with src files
+- `` make play`` to launch the game and begin playing Battleship within terminal
 - `` make test`` to run unit tests
 - `` make linecount`` which runs `` cloc --by-file --include-lang=OCaml.``to count the number of OCaml code lines for grading purposes and also runs `` ocamlbuild --clean``, which cleans out the directory you are in including build if you'll need to build up the project again before going through with the project.
