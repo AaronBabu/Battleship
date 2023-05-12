@@ -3,6 +3,7 @@ open Lib
 open State
 open Battleship
 open Parse
+open AI
 
 (* Our test file successfully tests several features of our game. Below is a
    detailed description of each test function and why/how we tested it this way:
@@ -32,11 +33,21 @@ open Parse
    compare. This testing was done completely with OUnit testing and we tested
    each possibility with glass box testing after the functions were written.
 
+   is_occupied test(): This tests the function is_occupied and tells you if the
+   position has a ship on it or not. This was tested using glass box testing. We
+   make sure it says true when the is a ship (#), false when it was already hit
+   (x), and false when it's a miss (o).
+
    check_hit_count_test(): This tested the function that checks if the game has
    ended or not, with one of the players hitting all ships or not hitting all
    ships. This was done with black box testing, as it will only return true if
    there are 17 x's on the board, and will return false with any other amount of
    x's.
+
+   parse_tests: In this we test both parse and parse 2. We test for when there
+   are multiple spaces, upper/lower case, and when exceptions should be raise.
+   These were done using glass box testing. Every feature for both parse and
+   parse2 were tested and work.
 
    Overall, our testing approach demonstreates full correctness of the system.
    With OUnit, we were able to test making moves, calculating coordinates, and
@@ -604,9 +615,6 @@ let place_ship_test (name : string)
   let final_grid = f initial_grid direction initial_spot in
   assert_equal expected_output initial_grid
 
-(* let parse_test (name : string) (input : string) (output : string * string) :
-   test = name >:: fun _ -> assert_equal output (parse input) *)
-
 let place_ship_tests =
   [
     place_ship_test "place ship1 left" print_ship1 grid_1_left_initial Left
@@ -671,6 +679,18 @@ let not_all_ships_hit_grid =
     [| " "; " "; " "; " "; "x"; " "; " "; " "; " "; " " |];
   ]
 
+let is_occupied_test (name : string) (grid : string array list)
+    (position : char * int) (expected_output : bool) : test =
+  name >:: fun _ -> assert_equal expected_output (is_occupied grid position)
+
+let is_occupied_tests =
+  [
+    is_occupied_test "is occupied" ship5_down_grid ('E', 7) true;
+    is_occupied_test "is not occupied" ship5_down_grid ('A', 1) false;
+    is_occupied_test "check miss" not_all_ships_hit_grid ('D', 3) false;
+    is_occupied_test "check hit" not_all_ships_hit_grid ('C', 2) false;
+  ]
+
 let check_hit_count_test (name : string) (grid : string array list)
     expected_output : test =
   name >:: fun _ -> assert_equal (check_hit_count grid) expected_output
@@ -682,15 +702,13 @@ let check_hit_count_tests =
     check_hit_count_test "false on mid-game grid" not_all_ships_hit_grid false;
   ]
 
-let print_tuple (x, y, z) = print_endline (Printf.sprintf "(%d, %d, %d)" x y z)
-
 let parse_tests =
   [
     ("basic parse" >:: fun _ -> assert_equal ("b", "4") (parse "shoot b 4"));
     ( "parse with spaces" >:: fun _ ->
-      assert_equal ("a", "3") (parse "shoot a 3 ") );
+      assert_equal ("a", "3") (parse "shoot a  3 ") );
     ( "parse with uppercase" >:: fun _ ->
-      assert_equal ("c", "2") (parse "shoot   C 2") );
+      assert_equal ("c", "2") (parse "shoot C 2") );
     ("empty parse" >:: fun _ -> assert_raises Empty (fun () -> parse ""));
     ("quit parse" >:: fun _ -> assert_raises Quit (fun () -> parse "quit"));
     ( "parse anything else " >:: fun _ ->
@@ -700,8 +718,8 @@ let parse_tests =
       assert_equal (Left, 'A', 4) (parse2 "place left     a   4") );
     ( "parse2 uppercase left" >:: fun _ ->
       assert_equal (Left, 'B', 3) (parse2 "place Left b 3") );
-    ( "parse2 right with uppercase coordinates" >:: fun _ ->
-      assert_equal (Right, 'C', 5) (parse2 "place right C 5") );
+    ( "parse2 lowercase right" >:: fun _ ->
+      assert_equal (Right, 'C', 5) (parse2 "place right c 5") );
     ( "parse2 uppercase right" >:: fun _ ->
       assert_equal (Right, 'C', 7) (parse2 "place Right c 7") );
     ( "parse2 uppercase up" >:: fun _ ->
@@ -709,9 +727,13 @@ let parse_tests =
     ( "parse2 lowercase up" >:: fun _ ->
       assert_equal (Up, 'G', 10) (parse2 "place up g 10") );
     ( "parse2 uppercase down" >:: fun _ ->
-      assert_equal (Down, 'F', 8) (parse2 "place Down  f  8") );
+      assert_equal (Down, 'F', 8) (parse2 "place Down f 8") );
     ( "parse2 lowercase down" >:: fun _ ->
-      assert_equal (Down, 'A', 4) (parse2 "place down A 4") );
+      assert_equal (Down, 'A', 4) (parse2 "place down a 4") );
+    ( "parse2 uppercase coordinates" >:: fun _ ->
+      assert_equal (Down, 'C', 5) (parse2 "place down C 5") );
+    ( "parse2 uppercase coordinates with spaces" >:: fun _ ->
+      assert_equal (Down, 'C', 5) (parse2 " place down  C   5") );
     ( "parse2 anything else" >:: fun _ ->
       assert_raises Malformed (fun () -> parse2 "flop") );
   ]
@@ -725,6 +747,7 @@ let tests =
            place_ship_tests;
            check_hit_count_tests;
            parse_tests;
+           is_occupied_tests;
          ]
 
 let _ = run_test_tt_main tests

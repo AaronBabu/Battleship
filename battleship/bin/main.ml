@@ -28,32 +28,10 @@ let player_board_for_transfer =
     [| " "; " "; " "; " "; " "; " "; " "; " "; " "; " " |];
     [| " "; " "; " "; " "; " "; " "; " "; " "; " "; " " |];
   ]
-(* let parse string : string * string = let start_lst = String.split_on_char ' '
-   string in let end_list = List.filter (fun x -> String.length x != 0)
-   start_lst in let m_list = List.map (fun x -> String.lowercase_ascii x)
-   end_list in match m_list with | [] -> raise Empty | [ "quit" ] -> raise Quit
-   | "shoot" :: tl1 :: tl2 -> (tl1, List.hd tl2) | [ "win" ] -> ("Win",
-   "Checker") | _ -> raise Malformed
-
-   let parse2 string : direction * char * int = let start_lst =
-   String.split_on_char ' ' string in let end_list = List.filter (fun x ->
-   String.length x != 0) start_lst in let m_list = List.map (fun x ->
-   String.lowercase_ascii x) end_list in match m_list with | [] -> raise Empty |
-   "place" :: dir :: col :: row -> ( match dir with | "left" -> ( Left,
-   String.get (String.uppercase_ascii col) 0, int_of_string (List.hd row) ) |
-   "Left" -> ( Left, String.get (String.uppercase_ascii col) 0, int_of_string
-   (List.hd row) ) | "right" -> ( Right, String.get (String.uppercase_ascii col)
-   0, int_of_string (List.hd row) ) | "Right" -> ( Right, String.get
-   (String.uppercase_ascii col) 0, int_of_string (List.hd row) ) | "up" -> ( Up,
-   String.get (String.uppercase_ascii col) 0, int_of_string (List.hd row) ) |
-   "Up" -> ( Up, String.get (String.uppercase_ascii col) 0, int_of_string
-   (List.hd row) ) | "down" -> ( Down, String.get (String.uppercase_ascii col)
-   0, int_of_string (List.hd row) ) | "Down" -> ( Down, String.get
-   (String.uppercase_ascii col) 0, int_of_string (List.hd row) ) | _ -> raise
-   Malformed) | _ -> raise Malformed *)
 
 let reset_board () = List.map (fun row -> Array.copy row) randomgrid
 let player_board () = List.map (fun row -> Array.copy row) player_grid
+let print_score score = print_endline ("Your score is: " ^ string_of_int score)
 
 let rec play_game grid grid2 string =
   try
@@ -68,6 +46,8 @@ let rec play_game grid grid2 string =
     print_endline "\n Player board \n";
     print_column_label grid2;
     print_grid grid2 1;
+    let score = current_score () in
+    print_score score;
     print_endline "\n Choose a target: \n";
     let line = read_line () in
     play_game grid grid2 line
@@ -76,6 +56,8 @@ let rec play_game grid grid2 string =
   | Win -> print_endline "You Won!"
   | Lose -> print_endline "You Lose!"
   | _ ->
+      let score = current_score () in
+      print_score score;
       print_endline "\n Choose a target: \n";
       let line = read_line () in
       play_game grid grid2 line
@@ -91,10 +73,11 @@ let instructions () =
     \    Rules:\n\
     \      You are going to choose where you would like to place all 5 of your \
      ships.\n\
-    \      To place your ships type “place <left/right/up/down> \
-     <coordinates>”. It's important to note that you must place ships in valid \
-     positions. For example you cannot ask to place left or up if you are \
-     choosing position A 1. \n\
+    \      To place your ships type “place <left/right/up/down> <column \
+     letter> <row number>”.\n\
+    \      It's important to note that you must place ships in valid positions.\n\
+    \      For example, you cannot ask to place left or up if you are choosing \
+     position A 1. \n\
     \      Everyone's ships may be placed horizontally or vertically, but \
      never diagonally.\n\
     \      These ships will all be of different lengths. One will be of length \
@@ -117,7 +100,7 @@ let instructions () =
     \      If you want to quit at anytime press ctrl + c on your keyboard.\n\n\
     \    Warning:\n\
     \      Your opponent will also try to hit your ships.\n\
-    \      If your opponent hits your ship an x will appear on your board.";
+    \      If your opponent hits your ship an X will appear on your board.";
 
   print_endline "\n Happy playing! \n"
 
@@ -204,6 +187,8 @@ let main () =
   print_column_label grid2;
   print_grid grid2 1;
   print_endline "\n AI board \n";
+  let s = current_score () in
+  print_score s;
   print_endline "Choose a target:";
   let line = read_line () in
   play_game grid1 grid2 line

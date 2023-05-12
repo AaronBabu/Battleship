@@ -5,7 +5,7 @@
    keep track of position, hits, misses, ships. The symbols are as follows in
    the 2D list
 
-   (Subject to change) hit = "x" miss = "o" unhit ship = "."*)
+   (Subject to change) hit = "x" miss = "o" unhit ship = "#"*)
 
 exception Illegal
 
@@ -32,3 +32,5 @@ val new_turn : t -> string * string -> unit
     If a position has nothing on it, position turns to "o"
 
     Effecs: none. *)
+
+val current_score : unit -> int
