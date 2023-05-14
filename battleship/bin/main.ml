@@ -32,6 +32,11 @@ let player_board_for_transfer =
 let reset_board () = List.map (fun row -> Array.copy row) randomgrid
 let player_board () = List.map (fun row -> Array.copy row) player_grid
 let print_score score = print_endline ("Your score is: " ^ string_of_int score)
+let ai_phrases = [ "Nice shot"; "You'll never find my ships"; "Better lookout" ]
+
+let random () =
+  let random_index = Random.int (List.length ai_phrases) in
+  List.nth ai_phrases random_index
 
 let rec play_game grid grid2 string =
   try
@@ -61,6 +66,7 @@ let rec play_game grid grid2 string =
       print_endline "\n Choose a target: \n";
       let line = read_line () in
       play_game grid grid2 line
+(* print_string (random ()) *)
 
 let instructions () =
   print_string
