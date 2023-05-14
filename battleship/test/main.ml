@@ -47,7 +47,10 @@ open AI
    parse_tests: In this we test both parse and parse 2. We test for when there
    are multiple spaces, upper/lower case, and when exceptions should be raise.
    These were done using glass box testing. Every feature for both parse and
-   parse2 were tested and work.
+   parse2 were tested and were tested in different combinations to make sure it
+   works. This function had to be thoroughly tested because it is the way the
+   game can take what the player is saying and use it for other functions to
+   make that action happen.
 
    Overall, our testing approach demonstreates full correctness of the system.
    With OUnit, we were able to test making moves, calculating coordinates, and
@@ -679,6 +682,20 @@ let not_all_ships_hit_grid =
     [| " "; " "; " "; " "; "x"; " "; " "; " "; " "; " " |];
   ]
 
+let no_ships_hit_grid =
+  [
+    [| "#"; "#"; " "; " "; "#"; "#"; "#"; " "; " "; " " |];
+    [| " "; " "; "#"; "#"; "#"; " "; " "; " "; " "; " " |];
+    [| " "; " "; " "; "0"; " "; " "; " "; " "; " "; " " |];
+    [| " "; " "; " "; " "; " "; " "; "#"; " "; " "; " " |];
+    [| " "; " "; " "; " "; " "; " "; "#"; " "; "o"; " " |];
+    [| " "; "o"; " "; " "; "#"; " "; "#"; " "; " "; " " |];
+    [| " "; " "; " "; " "; "#"; " "; "#"; " "; " "; " " |];
+    [| " "; " "; " "; " "; "#"; " "; " "; " "; " "; " " |];
+    [| " "; " "; " "; " "; "#"; " "; " "; " "; " "; " " |];
+    [| " "; " "; " "; " "; "#"; " "; " "; " "; " "; " " |];
+  ]
+
 let is_occupied_test (name : string) (grid : string array list)
     (position : char * int) (expected_output : bool) : test =
   name >:: fun _ -> assert_equal expected_output (is_occupied grid position)
@@ -700,6 +717,7 @@ let check_hit_count_tests =
     check_hit_count_test "true" all_ships_hit_grid true;
     check_hit_count_test "false on empty grid" grid false;
     check_hit_count_test "false on mid-game grid" not_all_ships_hit_grid false;
+    check_hit_count_test "false on no ships hit grid" no_ships_hit_grid false;
   ]
 
 let parse_tests =
@@ -710,18 +728,28 @@ let parse_tests =
     ( "parse with uppercase" >:: fun _ ->
       assert_equal ("c", "2") (parse "shoot C 2") );
     ("empty parse" >:: fun _ -> assert_raises Empty (fun () -> parse ""));
+    ( "parse with just spaces" >:: fun _ ->
+      assert_raises Empty (fun () -> parse "    ") );
     ("quit parse" >:: fun _ -> assert_raises Quit (fun () -> parse "quit"));
+    ( "quit parse with spaces" >:: fun _ ->
+      assert_raises Quit (fun () -> parse "  quit  ") );
     ( "parse anything else " >:: fun _ ->
       assert_raises Malformed (fun () -> parse "hello") );
-    ("parse2 empty" >:: fun _ -> assert_raises Empty (fun () -> parse2 " "));
+    ("parse2 empty" >:: fun _ -> assert_raises Empty (fun () -> parse2 ""));
     ( "parse2 spaces" >:: fun _ ->
       assert_equal (Left, 'A', 4) (parse2 "place left     a   4") );
     ( "parse2 uppercase left" >:: fun _ ->
       assert_equal (Left, 'B', 3) (parse2 "place Left b 3") );
+    ( "parse 2 uppercase left uppercase coord" >:: fun _ ->
+      assert_equal (Left, 'B', 3) (parse2 "place Left B 3") );
     ( "parse2 lowercase right" >:: fun _ ->
       assert_equal (Right, 'C', 5) (parse2 "place right c 5") );
+    ( "parse2 lowercase right uppercase coord" >:: fun _ ->
+      assert_equal (Right, 'C', 5) (parse2 "place right C 5") );
     ( "parse2 uppercase right" >:: fun _ ->
       assert_equal (Right, 'C', 7) (parse2 "place Right c 7") );
+    ( "parse2 uppercase right uppercase coord" >:: fun _ ->
+      assert_equal (Right, 'C', 7) (parse2 "place Right C 7") );
     ( "parse2 uppercase up" >:: fun _ ->
       assert_equal (Up, 'D', 7) (parse2 " place Up d 7") );
     ( "parse2 lowercase up" >:: fun _ ->
@@ -736,6 +764,8 @@ let parse_tests =
       assert_equal (Down, 'C', 5) (parse2 " place down  C   5") );
     ( "parse2 anything else" >:: fun _ ->
       assert_raises Malformed (fun () -> parse2 "flop") );
+    ( "parse2 bunch of spaces" >:: fun _ ->
+      assert_raises Empty (fun () -> parse2 "    ") );
   ]
 
 let tests =
