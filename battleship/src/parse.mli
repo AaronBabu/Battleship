@@ -14,7 +14,7 @@ val parse : string -> string * string
    the player such as "shoot" or "quit" and the second string contains the
    coordinates of the grid they want to shoot into such as "a 4". Raises [Empty]
    if string input is empty. Raises [Malformed] if string is an invalid. Raises
-   [Quit] if input string is "quit".*)
+   [Quit] if input string is "quit". *)
 
 val parse2 : string -> direction * char * int
 (**[parse string] takes in a string that contains the player's action and parses

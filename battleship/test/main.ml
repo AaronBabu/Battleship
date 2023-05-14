@@ -52,6 +52,12 @@ open AI
    game can take what the player is saying and use it for other functions to
    make that action happen.
 
+   Tesing AI.ml random generating functions: To make sure the functions in AI.ml
+   were outputting random coordinates we test to see if they were in the write
+   range when the function ran 100 times. This was done for testing for random
+   numbers, letters, coordinates, and points. If the output is not in the proper
+   range the function fails.
+
    Overall, our testing approach demonstreates full correctness of the system.
    With OUnit, we were able to test making moves, calculating coordinates, and
    placing ships in every direction with ships of every length, which are the
@@ -93,8 +99,22 @@ let grid3 =
   [
     [| " "; " "; "x"; " "; " "; " "; " "; " "; " "; " " |];
     [| " "; " "; " "; " "; " "; " "; " "; " "; " "; " " |];
+    [| " "; " "; " "; " "; "#"; " "; " "; " "; " "; " " |];
+    [| " "; " "; " "; " "; "#"; " "; " "; " "; " "; " " |];
     [| " "; " "; " "; " "; " "; " "; " "; " "; " "; " " |];
     [| " "; " "; " "; " "; " "; " "; " "; " "; " "; " " |];
+    [| " "; " "; " "; " "; " "; " "; " "; " "; " "; " " |];
+    [| " "; " "; " "; " "; " "; " "; " "; " "; " "; " " |];
+    [| " "; " "; " "; " "; " "; " "; " "; " "; " "; " " |];
+    [| " "; " "; " "; " "; " "; " "; " "; " "; " "; " " |];
+  ]
+
+let grid4 =
+  [
+    [| " "; " "; "x"; " "; " "; " "; " "; " "; " "; " " |];
+    [| " "; " "; " "; " "; " "; " "; " "; " "; " "; " " |];
+    [| " "; " "; " "; " "; "x"; " "; " "; " "; " "; " " |];
+    [| " "; " "; " "; " "; "#"; " "; " "; " "; " "; " " |];
     [| " "; " "; " "; " "; " "; " "; " "; " "; " "; " " |];
     [| " "; " "; " "; " "; " "; " "; " "; " "; " "; " " |];
     [| " "; " "; " "; " "; " "; " "; " "; " "; " "; " " |];
@@ -123,7 +143,9 @@ let create_endcoords_test (name : string)
 let new_turn_tests =
   [
     new_turn_test "Basic Test" grid ("B", "4") grid2;
-    new_turn_exn_test "exn test" grid3 ("C", "1") Illegal;
+    new_turn_test "Hit ship" grid3 ("E", "3") grid4;
+    new_turn_exn_test "new_turn on missed ship" grid2 ("B", "4") Illegal;
+    new_turn_exn_test "new_turn on hit ship" grid3 ("C", "1") Illegal;
   ]
 
 let create_endcoords_tests =
@@ -735,6 +757,10 @@ let parse_tests =
       assert_raises Quit (fun () -> parse "  quit  ") );
     ( "parse anything else " >:: fun _ ->
       assert_raises Malformed (fun () -> parse "hello") );
+  ]
+
+let parse2_tests =
+  [
     ("parse2 empty" >:: fun _ -> assert_raises Empty (fun () -> parse2 ""));
     ( "parse2 spaces" >:: fun _ ->
       assert_equal (Left, 'A', 4) (parse2 "place left     a   4") );
@@ -768,6 +794,47 @@ let parse_tests =
       assert_raises Empty (fun () -> parse2 "    ") );
   ]
 
+let test_random_point () =
+  for i = 1 to 100 do
+    let a, b, c = pick_random_point grid in
+    if Char.code a < 65 || Char.code a > 74 || b < 1 || b > 10 then
+      failwith "Result outside expected range"
+  done
+
+let test_random_cord () =
+  for i = 1 to 100 do
+    let a, b = random_coord () in
+    if Char.code a < 65 || Char.code a > 74 || b < 0 || b > 9 then
+      failwith "Result outside expected range"
+  done
+
+let test_random_letter () =
+  for i = 1 to 100 do
+    let result = letter_randomizer () in
+    if Char.code result < 65 || Char.code result > 74 then
+      failwith "Result outside expected range"
+  done
+
+let test_random_num () =
+  for i = 1 to 100 do
+    let result = number_randomizer () in
+    if result < 1 || result > 10 then failwith "Result outside expected range"
+  done
+
+let test_coord () =
+  for i = 1 to 100 do
+    let a, b = coord () in
+    if Char.code a < 65 || Char.code a > 74 || b < 1 || b > 10 then
+      failwith "Result outside expected range"
+  done
+
+(* let update_score_test (name : string) (score : int ref) (expected_output :
+   int) : test = name >:: let new_score = update_score score in assert_equal
+   expected_output new_score
+
+   let s = ref 0 let update_score_tests = [ ("start with 0" >:: fun _ ->
+   assert_equal 1 ()) ] *)
+
 let tests =
   "test suite for Final Project"
   >::: List.flatten
@@ -777,7 +844,13 @@ let tests =
            place_ship_tests;
            check_hit_count_tests;
            parse_tests;
+           parse2_tests;
            is_occupied_tests;
          ]
 
 let _ = run_test_tt_main tests
+let _ = test_random_point ()
+let _ = test_random_cord ()
+let _ = test_random_letter ()
+let _ = test_random_num ()
+let _ = test_coord ()

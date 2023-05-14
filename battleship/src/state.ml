@@ -7,8 +7,11 @@ type t = string array list
 let index (c : char) : int = Char.code c - Char.code 'A'
 let init_state = make_play
 let score = ref 0
+let phrase = ref false
 let update_score score = score := !score + 1
 let current_score () = !score
+let current_phrase () = !phrase
+let changeback () = phrase := false
 
 let new_turn s position =
   let hit = false in

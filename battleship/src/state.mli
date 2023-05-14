@@ -34,3 +34,5 @@ val new_turn : t -> string * string -> unit
     Effecs: none. *)
 
 val current_score : unit -> int
+(** [current score] updates the score by one point everytime the player hits a
+    ship. *)
