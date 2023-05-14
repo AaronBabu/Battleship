@@ -33,9 +33,8 @@ let reset_board () = List.map (fun row -> Array.copy row) randomgrid
 let player_board () = List.map (fun row -> Array.copy row) player_grid
 let print_score score = print_endline ("Your score is: " ^ string_of_int score)
 
-let print_phrase p =
-  if p then print_endline "Ouch! You hit my ship :("
-  else print_endline "Haha you missed!"
+(* let print_phrase p = if p then print_endline "Ouch! You hit my ship :(" else
+   print_endline "Haha you missed!" *)
 
 let ai_phrases = [ "Nice shot"; "You'll never find my ships"; "Better lookout" ]
 
@@ -68,9 +67,8 @@ let rec play_game grid grid2 string =
   | _ ->
       let score = current_score () in
       print_score score;
-      let phrase = current_phrase () in
-      print_phrase phrase;
-      changeback ();
+      (* let phrase = current_phrase () in print_phrase phrase; changeback
+         (); *)
       print_endline "\n Choose a target: \n";
       let line = read_line () in
       play_game grid grid2 line
