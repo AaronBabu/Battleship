@@ -5,7 +5,7 @@
    keep track of position, hits, misses, ships. The symbols are as follows in
    the 2D list
 
-   (Subject to change) hit = "x" miss = "o" unhit ship = "#"*)
+   hit = "x" miss = "o" unhit ship = "#"*)
 
 exception Illegal
 
