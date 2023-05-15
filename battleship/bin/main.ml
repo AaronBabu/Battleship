@@ -101,7 +101,8 @@ let rec play_game grid grid2 string =
     let phrase = random ai_phrases in
     print_string [red] ("AI: " ^ phrase);
     print_endline "\n";
-    print_endline "\n Choose a target: \n";
+    print_endline "\n Choose a target: ";
+    print_endline "(shoot) (letter) (number)\n";
     let line = read_line () in
     play_game grid grid2 line
   with
@@ -212,27 +213,32 @@ let main () =
   let grid2 = player_board () in
   print_column_label grid2;
   print_grid grid2 1;
-  print_endline "\n Place ship 1 - Size 2 \n";
+  print_endline "\n Place ship 1 - Size 2";
+  print_endline "(place) (direction) (letter) (number)\n";
   let line = read_line () in
   place_ship1 grid2 line;
   print_column_label grid2;
   print_grid grid2 1;
-  print_endline "\n Place ship 2 - Size 3 \n";
+  print_endline "\n Place ship 2 - Size 3";
+  print_endline "(place) (direction) (letter) (number)\n";
   let line = read_line () in
   place_ship2 grid2 line;
   print_column_label grid2;
   print_grid grid2 1;
-  print_endline "\n Place ship 3 - Size 3 \n";
+  print_endline "\n Place ship 3 - Size 3";
+  print_endline "(place) (direction) (letter) (number)\n";
   let line = read_line () in
   place_ship3 grid2 line;
   print_column_label grid2;
   print_grid grid2 1;
-  print_endline "\n Place ship 4 - Size 4 \n";
+  print_endline "\n Place ship 4 - Size 4";
+  print_endline "(place) (direction) (letter) (number)\n";
   let line = read_line () in
   place_ship4 grid2 line;
   print_column_label grid2;
   print_grid grid2 1;
-  print_endline "\n Place ship 5 - Size 5 \n";
+  print_endline "\n Place ship 5 - Size 5";
+  print_endline "(place) (direction) (letter) (number)\n";
   let line = read_line () in
   place_ship5 grid2 line;
   print_column_label grid2;
@@ -249,6 +255,7 @@ let main () =
   print_misses miss2;
   print_endline "\n";
   print_endline "Choose a target:";
+  print_endline "(shoot) (letter) (number)\n";
   let line = read_line () in
   play_game grid1 grid2 line
 

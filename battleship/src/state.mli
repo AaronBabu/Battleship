@@ -36,3 +36,16 @@ val new_turn : t -> string * string -> unit
 val current_score : unit -> int
 (** [current score] updates the score by one point everytime the player hits a
     ship. *)
+
+val index : char -> int
+(**[index c ] accesses the index or position of a char c and returns the
+    integer representation of the char.*)
+val score : int ref 
+(**[score] is the starting score of the player and gets updated as the player 
+    hits a ship*)
+    
+val current_score : unit -> int
+(** [current_score score ] updates the current score by one point everytime the player hits a
+    ship.*)
+val update_score : int ref -> unit
+(**[update_score score ] increments the score by one everytime a ship is hit*)
