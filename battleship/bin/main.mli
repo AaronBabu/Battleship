@@ -21,6 +21,12 @@ val player_board : unit -> string array list
 val print_score : int -> unit
 (**[print_score score] takes in a score and prints it. *)
 
+val print_score_ai : int -> unit
+(**[print_score_ai score] takes in the AI score and prints it. *)
+
+val print_misses : int -> unit
+(**[print_misses misses] takes in a misses and prints it. *)
+
 val play_game : string array list -> string array list -> string -> unit
 (**[play_game grid grid2 string] takes in the player's grid and the ai's grid as
    arguments. This function checks if the player or ai won throughout the game.
