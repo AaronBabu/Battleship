@@ -19,7 +19,7 @@ val ywing : ships
 (**[ywing] generates ship1 with length 2 for the grid*)
 val xwing : ships
 (**[xwing] generates ship2 with length 3 for the grid*)
-val mfalcon : ship
+val mfalcon : ships
 (**[mfalcon] generates ship3 with length 3 for the grid*)
 val delta7 : ships
 (**[delta7] generates ship4 with length 4 for the grid  *)
