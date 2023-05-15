@@ -47,5 +47,6 @@ val score : int ref
 val current_score : unit -> int
 (** [current_score score ] updates the current score by one point everytime the player hits a
     ship.*)
+    
 val update_score : int ref -> unit
 (**[update_score score ] increments the score by one everytime a ship is hit*)

@@ -637,7 +637,7 @@ let place_ship_test (name : string)
     (initial_grid : string array list) (direction : direction)
     (initial_spot : char * int) (expected_output : string array list) : test =
   name >:: fun _ ->
-  let final_grid = f initial_grid direction initial_spot in
+  let _ = f initial_grid direction initial_spot in
   assert_equal expected_output initial_grid
 
 let place_ship_tests =
