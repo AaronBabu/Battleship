@@ -38,7 +38,7 @@ val first : 'a * 'b * 'c -> 'a
 val second : 'a * 'b * 'c -> 'b
 (**[second (a, b, c)] takes in a triple and returns the second element. *)
 
-val third : 'a * 'b * 'c -> 'b
+val third : 'a * 'b * 'c -> 'c
 (**[third (a, b, c)] takes in a triple and returns the third element. *)
 
 val place_ship1 : string array list -> string -> unit
