@@ -113,3 +113,6 @@ val pick_random_point : string array list -> t * int * string
 
 val count_x : string array list -> int
 (** [count_x board] counts the number of hits on a board *)
+
+val count_o : string array list -> int
+(** [count_o board] counts the number of misses on a board *)

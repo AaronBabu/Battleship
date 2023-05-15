@@ -177,3 +177,12 @@ let count_x randomgrid =
   ) randomgrid;
   !count
 
+let count_o randomgrid =
+  let count = ref 0 in
+  List.iter (fun row ->
+    Array.iter (fun cell ->
+      if cell = "o" then incr count
+    ) row
+  ) randomgrid;
+  !count
+

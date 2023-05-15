@@ -34,6 +34,7 @@ let reset_board () = List.map (fun row -> Array.copy row) randomgrid
 let player_board () = List.map (fun row -> Array.copy row) player_grid
 let print_score score = print_string [green] ("Your score is: " ^ string_of_int score ^ "\n")
 let print_score_ai score = print_string [green] ("AI score is: " ^ string_of_int score ^ "\n")
+let print_misses score = print_string [green] ("Missed shots: " ^ string_of_int score ^ "\n")
 
 (* let print_phrase p = if p then print_endline "Ouch! You hit my ship :(" else
    print_endline "Haha you missed!" *)
@@ -86,10 +87,16 @@ let rec play_game grid grid2 string =
     print_endline "\n Player board \n";
     print_column_label grid2;
     print_grid grid2 1;
+    print_endline "\n";
     let score = current_score () in
     print_score score;
+    let misses1 = count_o grid in 
+    print_misses misses1;
+    print_endline "\n";
     let score2 = count_x grid2 in
     print_score_ai score2;
+    let misses2 = count_o grid2 in 
+    print_misses misses2;
     print_endline "\n";
     let phrase = random ai_phrases in
     print_string [red] ("AI: " ^ phrase);
@@ -102,14 +109,9 @@ let rec play_game grid grid2 string =
   | Win -> print_endline "You Won!"
   | Lose -> print_endline "You Lose!"
   | _ ->
-      let score = current_score () in
-      print_score score;
-      (* let phrase = current_phrase () in print_phrase phrase; changeback
-         (); *)
       print_endline "\n Choose a target: \n";
       let line = read_line () in
       play_game grid grid2 line
-(* print_string (random ()) *)
 
 let instructions () =
   print_string [white]
@@ -238,8 +240,13 @@ let main () =
   print_endline "\n AI board \n";
   let s = current_score () in
   print_score s;
-  let s2 = count_x grid2 in 
+  let miss1 = count_o grid1 in 
+  print_misses miss1;
+  print_endline "\n";
+  let s2 = count_x grid2 in
   print_score_ai s2;
+  let miss2 = count_o grid2 in 
+  print_misses miss2;
   print_endline "Choose a target:";
   let line = read_line () in
   play_game grid1 grid2 line
