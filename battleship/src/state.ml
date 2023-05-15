@@ -7,11 +7,11 @@ type t = string array list
 let index (c : char) : int = Char.code c - Char.code 'A'
 let init_state = make_play
 let score = ref 0
-let phrase = ref "you missed"
+
+(* let phrase = ref "you missed" *)
 let update_score score = score := !score + 1
 let current_score () = !score
-let current_phrase () = !phrase
-let changeback () = phrase := "you missed"
+(* let current_phrase () = !phrase let changeback () = phrase := "you missed" *)
 
 let new_turn s position =
   let positionupper = String.uppercase_ascii (fst position) in

@@ -23,8 +23,6 @@ val xwing : ships
 (**[xwing] generates ship2 with length 3 for the grid*)
 
 val mfalcon : ships
-
-val mfalcon : ships
 (**[mfalcon] generates ship3 with length 3 for the grid*)
 
 val delta7 : ships
@@ -79,18 +77,18 @@ val xwingCoords : (t * int) list
 
 val mfalconCoords : (t * int) list
 (** [mfalconCoords] places mfalcon on the random grid by calling 
-    place_ship passing mfalcon and (xwing @ ywing) to represent the occupied 
+    place_ship passing mfalcon and (ywing @ xwing) to represent the occupied 
     coordinates from before which all returns the current coordinates of the 
     ship*)
 
 val delta7Coords : (t * int) list
 (**[delta7Coords] places delta7 on the random grid by calling place_ship passing
-    delta7 and (mfalcon @ xwing @ ywing) to represent the occupied coordinates
+    delta7 and ( ywing @ xwing @ mfalcon) to represent the occupied coordinates
     from before which all returns the current coordinates of the ship*)
 
 val stardestroyerCoords : (t * int) list
 (**[stardestroyer] places stardestroyer on the random grid by calling place_ship
-    by passing stardestroyer and (delta7 @ mfalcon @ xwing @ ywing) to represent 
+    by passing stardestroyer and ( ywing @ xwing @ mfalcon @ delta7) to represent 
     the occupied coordinates from before which all returns the current 
     coordinates of the ship*)
 

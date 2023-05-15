@@ -20,7 +20,11 @@ val player_board : unit -> string array list
 
 val print_score : int -> unit
 (**[print_score score] takes in a score and prints it. *)
-
+val ai_phrases : string list 
+(**[ai_phrases] which is a list of different phrases for the ai to output*)
+val random : 'a list -> 'a
+(**[random ai_phrases] which takes in the list of ai_phrases and randomly
+    selects one of the phrases to output*)
 val play_game : string array list -> string array list -> string -> unit
 (**[play_game grid grid2 string] takes in the player's grid and the ai's grid as
    arguments. This function checks if the player or ai won throughout the game.
@@ -62,7 +66,7 @@ val place_ship4 : string array list -> string -> unit
    coordinates and direction. *)
 
 val place_ship5 : string array list -> string -> unit
-(**[place_shipq grid string] takes in a grid and string. This function calls
+(**[place_ship grid string] takes in a grid and string. This function calls
    parse2 on the string and places ship5 on the given grid in the given
    coordinates and direction. *)
 
