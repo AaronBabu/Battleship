@@ -35,6 +35,14 @@ let print_score score = print_endline ("Your score is: " ^ string_of_int score)
 
 (* let print_phrase p = if p then print_endline "Ouch! You hit my ship :(" else
    print_endline "Haha you missed!" *)
+let colorize_ship (s : ship) : string =
+  let open ANSITerminal in
+  match s with
+  | Ship1 -> sprintf [ Bold; blue ] "C"
+  | Ship2 -> sprintf [ Bold; green ] "B"
+  | Ship3 -> sprintf [ Bold; magenta ] "R"
+  | Ship4 -> sprintf [ Bold; yellow ] "S"
+  | Ship5 -> sprintf [ Bold; red ] "D"
 
 let ai_phrases = [ "Nice shot"; "You'll never find my ships"; "Better lookout" ]
 
