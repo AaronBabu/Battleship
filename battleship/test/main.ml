@@ -794,6 +794,48 @@ let parse2_tests =
       assert_raises Empty (fun () -> parse2 "    ") );
   ]
 
+let count_x_grid =
+  [
+    [| "#"; "#"; " "; " "; " "; " "; " "; " "; " "; " " |];
+    [| " "; " "; " "; " "; " "; "x"; " "; " "; " "; " " |];
+    [| " "; " "; " "; "o"; " "; "x"; " "; "x"; " "; " " |];
+    [| " "; " "; " "; " "; " "; "x"; " "; "x"; " "; " " |];
+    [| " "; " "; " "; " "; " "; "x"; " "; "x"; "o"; " " |];
+    [| " "; "o"; " "; " "; "#"; " "; " "; " "; " "; " " |];
+    [| " "; " "; " "; " "; "#"; " "; " "; " "; " "; " " |];
+    [| " "; " "; " "; " "; "#"; " "; " "; " "; " "; " " |];
+    [| " "; " "; " "; " "; "#"; " "; " "; " "; " "; " " |];
+    [| " "; " "; " "; " "; "#"; " "; " "; " "; " "; " " |];
+  ]
+
+
+let count_o_grid =
+  [
+    [| "#"; "#"; " "; " "; " "; " "; " "; " "; " "; " " |];
+    [| " "; " "; " "; " "; " "; " "; "o"; " "; " "; " " |];
+    [| " "; " "; " "; "o"; " "; " "; " "; " "; " "; " " |];
+    [| " "; " "; " "; " "; " "; " "; " "; " "; " "; " " |];
+    [| " "; " "; " "; " "; " "; " "; " "; " "; "o"; " " |];
+    [| " "; "o"; " "; " "; " "; " "; " "; " "; " "; " " |];
+    [| " "; " "; " "; " "; " "; " "; " "; " "; " "; " " |];
+    [| " "; " "; "o"; " "; " "; " "; " "; " "; " "; " " |];
+    [| " "; " "; " "; " "; " "; " "; " "; " "; "o"; " " |];
+    [| " "; " "; " "; " "; " "; " "; "o"; " "; " "; " " |];
+  ]
+
+let count_x_test (name : string) (grid : string array list) (expected_output : int) : test =
+name >:: fun _ -> assert_equal expected_output (count_x grid)
+
+let count_o_test (name : string) (grid : string array list) (expected_output : int) : test =
+name >:: fun _ -> assert_equal expected_output (count_o grid)
+
+let count_test = [
+  count_x_test "Counting x's" count_x_grid 7;
+  count_x_test "Counting 0 x's" grid 0;
+  count_o_test "Counting o's" count_o_grid 7;
+  count_o_test "Counting 0 o's" count_o_grid 0;
+]
+  
 let test_random_point () =
   for i = 1 to 100 do
     let a, b, c = pick_random_point grid in

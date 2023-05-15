@@ -247,6 +247,7 @@ let main () =
   print_score_ai s2;
   let miss2 = count_o grid2 in 
   print_misses miss2;
+  print_endline "\n";
   print_endline "Choose a target:";
   let line = read_line () in
   play_game grid1 grid2 line
