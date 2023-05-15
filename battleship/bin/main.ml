@@ -5,6 +5,7 @@ open Battleship
 open AI
 open State
 open Parse
+open ANSITerminal
 
 type object_phrase = string * string
 type command = Shoot of object_phrase
@@ -31,7 +32,8 @@ let player_board_for_transfer =
 
 let reset_board () = List.map (fun row -> Array.copy row) randomgrid
 let player_board () = List.map (fun row -> Array.copy row) player_grid
-let print_score score = print_endline ("Your score is: " ^ string_of_int score)
+let print_score score = print_string [green] ("Your score is: " ^ string_of_int score ^ "\n")
+let print_score_ai score = print_string [green] ("AI score is: " ^ string_of_int score ^ "\n")
 
 (* let print_phrase p = if p then print_endline "Ouch! You hit my ship :(" else
    print_endline "Haha you missed!" *)
@@ -40,7 +42,32 @@ let print_score score = print_endline ("Your score is: " ^ string_of_int score)
    | Ship3 -> sprintf [ Bold; magenta ] "R" | Ship4 -> sprintf [ Bold; yellow ]
    "S" | Ship5 -> sprintf [ Bold; red ] "D" *)
 
-let ai_phrases = [ "Nice shot"; "You'll never find my ships"; "Better lookout" ]
+   let ai_phrases = [
+    "Nice shot";
+    "You'll never find my ships";
+    "Better lookout";
+    "Is that the best you can do?";
+    "You're going to need a bigger boat";
+    "Missed me by a mile!";
+    "You're not even close";
+    "I can do this all day";
+    "You're sailing in the wrong direction";
+    "You couldn't hit water if you fell out of a boat";
+    "My turn, prepare yourself!";
+    "You seem lost at sea";
+    "That was close, but not close enough";
+    "You won't sink me that easily";
+    "Try again, captain!";
+    "A swing and a miss!";
+    "You're out of your depth";
+    "Better luck next time";
+    "Watch and learn";
+    "Is this your first time playing?";
+    "Don't quit your day job";
+    "You're in over your head";
+    "Looks like you're lost at sea";
+    "I'm still afloat"
+  ]
 
 let random ai_phrases =
   let random_index = Random.int (List.length ai_phrases) in
@@ -54,16 +81,18 @@ let rec play_game grid grid2 string =
     new_turn grid move2;
     let _ = pick_random_point grid2 in
     print_endline "\n AI board \n";
-    print_column_label grid;
+    print_column_label_ai grid;
     print_grid_ai grid 1;
     print_endline "\n Player board \n";
     print_column_label grid2;
     print_grid grid2 1;
     let score = current_score () in
     print_score score;
+    let score2 = count_x grid2 in
+    print_score_ai score2;
     print_endline "\n";
     let phrase = random ai_phrases in
-    print_endline ("AI: " ^ phrase);
+    print_string [red] ("AI: " ^ phrase);
     print_endline "\n";
     print_endline "\n Choose a target: \n";
     let line = read_line () in
@@ -83,7 +112,7 @@ let rec play_game grid grid2 string =
 (* print_string (random ()) *)
 
 let instructions () =
-  print_string
+  print_string [white]
     "Hello and welcome to Battleship!\n\
     \    Before you start your battle we must run you through everything you \
      as a player need to know.\n\n\
@@ -209,6 +238,8 @@ let main () =
   print_endline "\n AI board \n";
   let s = current_score () in
   print_score s;
+  let s2 = count_x grid2 in 
+  print_score_ai s2;
   print_endline "Choose a target:";
   let line = read_line () in
   play_game grid1 grid2 line

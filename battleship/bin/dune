@@ -1,6 +1,6 @@
 (executable
  (name main)
- (libraries lib))
+ (libraries lib ANSITerminal))
 
 ; ((library
 ;   (name bin)
