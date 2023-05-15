@@ -110,3 +110,6 @@ val pick_random_point : string array list -> t * int * string
 (** [pick_random_point board] which picks a random point on the board, updates
     the point with "x" if hit or "o" if missed and outputs the updated
     coordinate with its symbol. *)
+
+val count_x : string array list -> int
+(** [count_x board] counts the number of hits on a board *)

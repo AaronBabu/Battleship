@@ -1,4 +1,5 @@
 open AI
+open ANSITerminal
 
 (* Define the grid dimensions *)
 let num_rows = 10
@@ -14,30 +15,57 @@ let num_columns array =
 let rec get_rowlines n acc =
   if n = 0 then "" else get_rowlines (n - 1) acc ^ "+---"
 
-let print_rowlines n = print_string ("  " ^ get_rowlines n "" ^ "+")
+let print_rowlines n = print_string [blue] ("  " ^ get_rowlines n "" ^ "+")
+
+
+let print_rowlines_ai n = print_string [red] ("  " ^ get_rowlines n "" ^ "+")
 
 let rec print_row row : unit =
-  Array.iter (fun x -> print_string ("| " ^ x ^ " ")) row;
-  print_string "|"
+  Array.iter (fun x -> match x with 
+  | "x" -> (print_string [blue] "| "); 
+           (print_string [red] (x ^ " "))
+  | "o" -> (print_string [blue] "| "); 
+           (print_string [green] (x ^ " "))
+  | "#" -> (print_string [blue] "| "); 
+           (print_string [white] (x ^ " "))
+  | _ -> print_string [blue] ("| " ^ x ^ " ")) row;
+  print_string [blue] "|"
 
 let rec print_row_ai row : unit =
   Array.iter
-    (fun x ->
-      if x <> "#" then print_string ("| " ^ x ^ " ")
-      else print_string ("| " ^ " " ^ " "))
+    (fun x -> match x with 
+    | "x" -> (print_string [red] "| "); 
+             (print_string [blue] (x ^ " "))
+    | "o" -> (print_string [red] "| "); 
+             (print_string [green] (x ^ " "))
+    | "#" -> (print_string [red] "| "); 
+             (print_string [white] (" " ^ " "))
+    | _ -> print_string [red] ("| " ^ x ^ " "))
     row;
-  print_string "|"
+  print_string [red] "|"
 
 let print_column_label array =
   let num_cols = num_columns array in
-  print_string "    ";
+  print_string [blue] "    ";
   for j = 1 to num_cols do
-    print_string (Char.escaped (Char.chr (j + 64)));
+    print_string [blue] (Char.escaped (Char.chr (j + 64)));
     (* convert column number to letter *)
-    print_string "   "
+    print_string [blue] "   "
   done;
   print_newline ();
   print_rowlines num_cols;
+  print_newline ()
+
+let print_column_label_ai array =
+  let num_cols = num_columns array in
+  print_string [red] "    ";
+  for j = 1 to num_cols do
+    print_string [red] (Char.escaped (Char.chr (j + 64)));
+    (* convert column number to letter *)
+    print_string [red] "   "
+  done;
+  print_newline ();
+  print_rowlines_ai num_cols;
   print_newline ()
 
 (* Define a function to print the entire grid with row and column labels *)
@@ -45,10 +73,10 @@ let rec print_grid array (row_idx : int) =
   let single = if row_idx < 10 then true else false in
   let columns = num_columns array in
   match array with
-  | [] -> print_string ""
+  | [] -> print_string [blue] ""
   | h :: t ->
-      print_int row_idx;
-      if single then print_string " " else print_string "";
+      print_string [blue] (string_of_int row_idx);
+      if single then print_string [blue] " " else print_string [blue] "";
       print_row h;
       print_endline "";
       print_rowlines columns;
@@ -59,13 +87,13 @@ let rec print_grid_ai array (row_idx : int) =
   let single = if row_idx < 10 then true else false in
   let columns = num_columns array in
   match array with
-  | [] -> print_string ""
+  | [] -> print_string [red] ""
   | h :: t ->
-      print_int row_idx;
-      if single then print_string " " else print_string "";
+      print_string [red] (string_of_int row_idx);
+      if single then print_string [red] " " else print_string [red] "";
       print_row_ai h;
       print_endline "";
-      print_rowlines columns;
+      print_rowlines_ai columns;
       print_endline "";
       print_grid_ai t (row_idx + 1)
 

@@ -18,6 +18,9 @@ val get_rowlines : int -> 'a -> string
 val print_rowlines : int -> unit
 (**[print_rowlines n] takes an int n and print rowlines of the grid*)
 
+val print_rowlines_ai : int -> unit
+(**[print_rowlines n] takes an int n and print rowlines of the grid for the ai*)
+
 val print_row : string array -> unit
 (** [print_row row] takes in row and prints each row of the grid*)
 
@@ -26,6 +29,10 @@ val print_row_ai : string array -> unit
 
 val print_column_label : 'a array list -> unit
 (**[print_column_label array] takes in an array and prints the labels of column
+   of the grid. *)
+
+val print_column_label_ai : 'a array list -> unit
+(**[print_column_label array] takes in an array and prints the labels of column for the ai
    of the grid. *)
 
 val print_grid : string array list -> int -> unit

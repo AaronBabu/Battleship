@@ -163,8 +163,17 @@ let rec pick_random_point board =
   | "#" ->
       (List.nth board row).(col_code - 65) <- "x";
       (Char.chr col_code, row + 1, "x")
-      (* Return the updated coordinate and the symbol placed *)
   | _ ->
       (List.nth board row).(col_code - 65) <- "o";
       (Char.chr col_code, row + 1, "o")
-(* Return the updated coordinate and the symbol placed *)
+
+
+let count_x randomgrid =
+  let count = ref 0 in
+  List.iter (fun row ->
+    Array.iter (fun cell ->
+      if cell = "x" then incr count
+    ) row
+  ) randomgrid;
+  !count
+
