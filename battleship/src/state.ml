@@ -14,7 +14,6 @@ let current_phrase () = !phrase
 let changeback () = phrase := "you missed"
 
 let new_turn s position =
-  let hit = false in
   let positionupper = String.uppercase_ascii (fst position) in
   let row = int_of_string (snd position) - 1 |> List.nth s in
   let col = index positionupper.[0] in
